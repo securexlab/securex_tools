@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Land Area Converter Nepal | Ropani Bigha to Sq Feet</title>
+    <meta name="description" content="Convert Nepal land measurement units: Ropani, Aana, Paisa, Daam to square feet/meters. Also convert Bigha, Kattha, Dhur. Free online land area converter for Nepal.">
+    <meta name="keywords" content="land converter Nepal, ropani to sq feet, bigha to kattha, Nepal land measurement, ropani bigha converter, land area calculator Nepal">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://securexlab.com/tools/land-converter/">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7365011588835579"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-slate-50 min-h-screen">
+
+    <nav class="bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="../../index.html" class="text-slate-500 hover:text-blue-600 flex items-center gap-1 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                    </svg>
+                    Back to Hub
+                </a>
+                <span class="h-6 w-[1px] bg-slate-200"></span>
+                <span class="font-bold text-slate-800">Land Area Converter</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto px-4 py-12">
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            
+            <div class="p-8 border-b border-slate-100">
+                <h2 class="text-2xl font-bold text-slate-900">Nepal Land Unit Converter</h2>
+                <p class="text-slate-500">Calculate Ropani and Bigha systems into modern metrics.</p>
+            </div>
+
+            <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-12">
+                
+                <!-- Pahadi System (Hills) -->
+                <div class="space-y-6">
+                    <h3 class="text-sm font-bold text-blue-600 uppercase tracking-widest">Hilly Region (Ropani)</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-500 mb-1">Ropani</label>
+                            <input type="number" id="ropani" value="0" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-500 mb-1">Aana</label>
+                            <input type="number" id="aana" value="0" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-500 mb-1">Paisa</label>
+                            <input type="number" id="paisa" value="0" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-500 mb-1">Daam</label>
+                            <input type="number" id="daam" value="0" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terai System (Plains) -->
+                <div class="space-y-6">
+                    <h3 class="text-sm font-bold text-emerald-600 uppercase tracking-widest">Terai Region (Bigha)</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-500 mb-1">Bigha</label>
+                            <input type="number" id="bigha" value="0" class="w-full p-3 bg-emerald-50/50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-500 mb-1">Kattha</label>
+                            <input type="number" id="kattha" value="0" class="w-full p-3 bg-emerald-50/50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-500 mb-1">Dhur</label>
+                            <input type="number" id="dhur" value="0" class="w-full p-3 bg-emerald-50/50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Results Panel -->
+            <div class="bg-slate-900 p-8 text-white">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+                    <div>
+                        <div class="text-slate-400 text-sm mb-1 uppercase font-semibold">Total Square Feet</div>
+                        <div id="resSqFt" class="text-4xl font-bold text-blue-400">0.00</div>
+                    </div>
+                    <div>
+                        <div class="text-slate-400 text-sm mb-1 uppercase font-semibold">Total Square Meters</div>
+                        <div id="resSqMt" class="text-4xl font-bold text-emerald-400">0.00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const inputs = ['ropani', 'aana', 'paisa', 'daam', 'bigha', 'kattha', 'dhur'];
+        
+        inputs.forEach(id => {
+            document.getElementById(id).addEventListener('input', (e) => calculate(e.target.id));
+        });
+
+        function calculate(source) {
+            let totalSqFt = 0;
+
+            if (['ropani', 'aana', 'paisa', 'daam'].includes(source)) {
+                const r = parseFloat(document.getElementById('ropani').value) || 0;
+                const a = parseFloat(document.getElementById('aana').value) || 0;
+                const p = parseFloat(document.getElementById('paisa').value) || 0;
+                const d = parseFloat(document.getElementById('daam').value) || 0;
+                
+                totalSqFt = (r * 5476) + (a * 342.25) + (p * 85.56) + (d * 21.39);
+                // Reset Terai inputs for clarity
+                document.getElementById('bigha').value = 0;
+                document.getElementById('kattha').value = 0;
+                document.getElementById('dhur').value = 0;
+            } else {
+                const b = parseFloat(document.getElementById('bigha').value) || 0;
+                const k = parseFloat(document.getElementById('kattha').value) || 0;
+                const dh = parseFloat(document.getElementById('dhur').value) || 0;
+
+                totalSqFt = (b * 72900) + (k * 3645) + (dh * 182.25);
+                // Reset Pahadi inputs for clarity
+                document.getElementById('ropani').value = 0;
+                document.getElementById('aana').value = 0;
+                document.getElementById('paisa').value = 0;
+                document.getElementById('daam').value = 0;
+            }
+
+            document.getElementById('resSqFt').innerText = totalSqFt.toFixed(2);
+            document.getElementById('resSqMt').innerText = (totalSqFt / 10.764).toFixed(2);
+        }
+    </script>
+</body>
+</html>

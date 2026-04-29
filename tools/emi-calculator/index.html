@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMI & Interest Calculator Nepal | Bank & Village Loan Calculator</title>
+    <meta name="description" content="Calculate bank EMI with amortization or village interest (Sikada/Saawa). Free Nepal loan calculator. Calculate monthly payments, total interest, and total repayment amount.">
+    <meta name="keywords" content="EMI calculator Nepal, bank loan calculator, sikada calculator, saawa byaj, village interest Nepal, loan EMI calculator">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://securexlab.com/tools/emi-calculator/">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Inter', sans-serif; }</style>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7365011588835579"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col text-slate-900">
+
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="../../index.html" class="text-slate-500 hover:text-blue-600 flex items-center gap-1 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                    </svg>
+                    Back to Hub
+                </a>
+                <span class="h-6 w-[1px] bg-slate-200"></span>
+                <span class="font-bold text-slate-800">SecureX Lab Tools</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-4xl mx-auto w-full px-4 py-12">
+        <div class="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
+            
+            <!-- Tab Navigation -->
+            <div class="flex border-b border-slate-100 bg-slate-50/50">
+                <button onclick="switchTab('bank')" id="tabBank" class="flex-1 py-5 text-sm font-bold border-b-2 border-blue-600 text-blue-600 transition-all bg-white">Bank EMI (Amortization)</button>
+                <button onclick="switchTab('village')" id="tabVillage" class="flex-1 py-5 text-sm font-bold border-b-2 border-transparent text-slate-400 hover:text-slate-600 transition-all">Village Interest (Sikada)</button>
+            </div>
+
+            <div class="p-8 lg:p-12 grid grid-cols-1 md:grid-cols-2 gap-12">
+                
+                <!-- Inputs -->
+                <div class="space-y-6">
+                    <div id="bankInputs" class="space-y-6">
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-slate-500 uppercase">Loan Amount (P)</label>
+                            <input type="number" id="bankPrincipal" value="1000000" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-blue-50 focus:border-blue-600 outline-none font-bold">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-slate-500 uppercase">Interest Rate (% Annual)</label>
+                            <input type="number" id="bankRate" value="12" step="0.1" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-blue-50 focus:border-blue-600 outline-none font-bold">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-slate-500 uppercase">Tenure (Years)</label>
+                            <input type="number" id="bankTenure" value="5" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-blue-50 focus:border-blue-600 outline-none font-bold">
+                        </div>
+                    </div>
+
+                    <div id="villageInputs" class="space-y-6 hidden">
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-slate-500 uppercase">Principal (Saawa)</label>
+                            <input type="number" id="vPrincipal" value="100000" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-blue-50 focus:border-blue-600 outline-none font-bold">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-slate-500 uppercase">Interest (Sikada / Monthly %)</label>
+                            <input type="number" id="vRate" value="2" step="0.1" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-blue-50 focus:border-blue-600 outline-none font-bold">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-slate-500 uppercase">Time (Months)</label>
+                            <input type="number" id="vTime" value="12" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-blue-50 focus:border-blue-600 outline-none font-bold">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Display -->
+                <div class="flex flex-col justify-center items-center text-center p-8 bg-blue-50 rounded-3xl border border-blue-100">
+                    <span id="resultLabel" class="text-xs font-bold text-blue-600 uppercase tracking-widest mb-2">Monthly EMI</span>
+                    <div id="mainResult" class="text-5xl font-black text-slate-900">Rs. 0</div>
+                    
+                    <div class="mt-8 w-full space-y-4 text-sm">
+                        <div class="flex justify-between text-slate-500">
+                            <span>Total Interest</span>
+                            <span id="subInterest" class="font-bold text-slate-800">Rs. 0</span>
+                        </div>
+                        <div class="flex justify-between text-slate-500">
+                            <span>Grand Total (P+I)</span>
+                            <span id="subTotal" class="font-bold text-slate-800">Rs. 0</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentTab = 'bank';
+
+        function switchTab(tab) {
+            currentTab = tab;
+            document.getElementById('bankInputs').classList.toggle('hidden', tab !== 'bank');
+            document.getElementById('villageInputs').classList.toggle('hidden', tab !== 'village');
+            
+            document.getElementById('tabBank').className = tab === 'bank' ? 'flex-1 py-5 text-sm font-bold border-b-2 border-blue-600 text-blue-600 transition-all bg-white' : 'flex-1 py-5 text-sm font-bold border-b-2 border-transparent text-slate-400 hover:text-slate-600 transition-all';
+            document.getElementById('tabVillage').className = tab === 'village' ? 'flex-1 py-5 text-sm font-bold border-b-2 border-blue-600 text-blue-600 transition-all bg-white' : 'flex-1 py-5 text-sm font-bold border-b-2 border-transparent text-slate-400 hover:text-slate-600 transition-all';
+            
+            document.getElementById('resultLabel').innerText = tab === 'bank' ? 'Monthly EMI' : 'Simple Interest';
+            calculate();
+        }
+
+        function calculate() {
+            if (currentTab === 'bank') {
+                const P = parseFloat(document.getElementById('bankPrincipal').value) || 0;
+                const r = (parseFloat(document.getElementById('bankRate').value) || 0) / 12 / 100;
+                const n = (parseFloat(document.getElementById('bankTenure').value) || 0) * 12;
+
+                if (P && r && n) {
+                    const emi = P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+                    const totalPay = emi * n;
+                    updateDOM(emi, totalPay - P, totalPay);
+                }
+            } else {
+                const P = parseFloat(document.getElementById('vPrincipal').value) || 0;
+                const r = parseFloat(document.getElementById('vRate').value) || 0;
+                const t = parseFloat(document.getElementById('vTime').value) || 0;
+
+                const interest = (P * r * t) / 100;
+                updateDOM(interest, interest, P + interest);
+            }
+        }
+
+        function updateDOM(main, interest, total) {
+            document.getElementById('mainResult').innerText = `Rs. ${Math.round(main).toLocaleString()}`;
+            document.getElementById('subInterest').innerText = `Rs. ${Math.round(interest).toLocaleString()}`;
+            document.getElementById('subTotal').innerText = `Rs. ${Math.round(total).toLocaleString()}`;
+        }
+
+        document.querySelectorAll('input').forEach(input => input.addEventListener('input', calculate));
+        calculate();
+    </script>
+</body>
+</html>

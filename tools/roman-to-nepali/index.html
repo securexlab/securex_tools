@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roman to Nepali Converter | Phonetic Nepali Typing</title>
+    <meta name="description" content="Type in Roman English and convert to Nepali Devanagari instantly. Free phonetic Nepali typing tool. Type Namaste → नमस्ते. 100% private, client-side processing.">
+    <meta name="keywords" content="Roman to Nepali, phonetic Nepali typing, Nepali converter, type in Nepali, English to Nepali, Devanagari converter, Nepali transliteration">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://securexlab.com/tools/roman-to-nepali/">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Roman to Nepali Converter",
+        "url": "https://securexlab.com/tools/roman-to-nepali/",
+        "description": "Type in Roman English and convert to Nepali Devanagari instantly"
+    }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class' };
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-slate-50: #f8fafc;
+            --color-slate-100: #f1f5f9;
+            --color-slate-200: #e2e8f0;
+            --color-slate-300: #cbd5e1;
+            --color-slate-400: #94a3b8;
+            --color-slate-500: #64748b;
+            --color-slate-600: #475569;
+            --color-slate-700: #334155;
+            --color-slate-800: #1e293b;
+            --color-slate-900: #0f172a;
+        }
+        .dark {
+            --color-slate-50: #0f172a;
+            --color-slate-100: #1e293b;
+            --color-slate-200: #334155;
+            --color-slate-300: #475569;
+            --color-slate-400: #64748b;
+            --color-slate-500: #94a3b8;
+            --color-slate-600: #cbd5e1;
+            --color-slate-700: #e2e8f0;
+            --color-slate-800: #f1f5f9;
+            --color-slate-900: #f8fafc;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7365011588835579"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 min-h-screen flex flex-col text-slate-900 dark:text-white transition-colors">
+
+    <!-- Navigation -->
+    <nav class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="../../index.html" class="text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 flex items-center gap-1 transition-all group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform group-hover:-translate-x-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                    </svg>
+                    Back to Hub
+                </a>
+                <span class="h-6 w-[1px] bg-slate-200 dark:bg-slate-600"></span>
+                <span class="font-bold text-slate-800 dark:text-white tracking-tight">SecureX Lab <span class="text-blue-600">Tools</span></span>
+            </div>
+            <button onclick="toggleDarkMode()" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">
+                <svg id="sunIcon" class="w-5 h-5 text-slate-600 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <svg id="moonIcon" class="w-5 h-5 text-yellow-400 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-5xl mx-auto w-full px-4 py-12">
+        <!-- Tool Description -->
+        <div class="bg-blue-50 dark:bg-blue-900/30 rounded-2xl p-6 mb-8">
+            <h2 class="text-lg font-bold text-slate-800 dark:text-white mb-2">About This Tool</h2>
+            <div class="text-slate-600 dark:text-slate-300 text-sm space-y-2">
+                <p>Type in Roman English (phonetic) and get instant Nepali Devanagari output. Simply type like "Namaste" and it converts to "नमस्ते".</p>
+                <p>This <strong>Online Roman to Nepali Converter</strong> makes typing in Nepali extremely easy without needing a dedicated Nepali keyboard. It employs an advanced phonetic matching system that works seamlessly in your browser. All typing remains private as it runs entirely on your device.</p>
+            </div>
+        </div>
+
+        <div class="space-y-6">
+            <div class="text-center md:text-left">
+                <h1 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">Phonetic Nepali Typing</h1>
+                <p class="text-slate-500 dark:text-slate-400 mt-2">Type in Roman English (e.g., "Namaste") and it converts instantly to Nepali (नमस्ते).</p>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+                <div class="p-2 border-b border-slate-100 dark:border-slate-700 flex justify-end gap-2 bg-slate-50 dark:bg-slate-700/50">
+                    <button onclick="clearText()" class="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-red-600 transition-colors">Clear All</button>
+                    <button onclick="copyToClipboard()" class="px-5 py-2 bg-blue-600 text-white text-sm font-bold rounded-lg hover:bg-blue-700 transition-all flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                        </svg>
+                        Copy Nepali Text
+                    </button>
+                </div>
+                
+                <textarea id="typingArea" 
+                    placeholder="Typing suru garnuhos..." 
+                    class="w-full h-[300px] p-8 text-2xl leading-relaxed focus:outline-none resize-none placeholder:text-slate-300 dark:placeholder:text-slate-500 dark:bg-slate-800 dark:text-white transition-all"
+                    spellcheck="false"></textarea>
+            </div>
+
+            <div class="flex items-center justify-between text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest px-2">
+                <span>Direct Phonetic Mapping Active</span>
+                <span id="charCount">0 Characters</span>
+            </div>
+        </div>
+
+        <!-- Key Mapping Reference -->
+        <div class="mt-8 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+            <div class="p-4 bg-slate-100 dark:bg-slate-700 border-b border-slate-200 dark:border-slate-600">
+                <h3 class="font-bold text-slate-800 dark:text-white">Phonetic Key Mapping Reference</h3>
+            </div>
+            <div class="p-6">
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 text-sm">
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">k</span><span class="text-slate-500 dark:text-slate-400">क</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">kh</span><span class="text-slate-500 dark:text-slate-400">ख</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">g</span><span class="text-slate-500 dark:text-slate-400">ग</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">c</span><span class="text-slate-500 dark:text-slate-400">च</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">j</span><span class="text-slate-500 dark:text-slate-400">ज</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">t</span><span class="text-slate-500 dark:text-slate-400">त</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">th</span><span class="text-slate-500 dark:text-slate-400">थ</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">d</span><span class="text-slate-500 dark:text-slate-400">द</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">n</span><span class="text-slate-500 dark:text-slate-400">न</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">p</span><span class="text-slate-500 dark:text-slate-400">प</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">b</span><span class="text-slate-500 dark:text-slate-400">ब</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">m</span><span class="text-slate-500 dark:text-slate-400">म</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">y</span><span class="text-slate-500 dark:text-slate-400">य</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">r</span><span class="text-slate-500 dark:text-slate-400">र</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">l</span><span class="text-slate-500 dark:text-slate-400">ल</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">v/w</span><span class="text-slate-500 dark:text-slate-400">व</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">s</span><span class="text-slate-500 dark:text-slate-400">स</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">sh</span><span class="text-slate-500 dark:text-slate-400">श</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">h</span><span class="text-slate-500 dark:text-slate-400">ह</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">aa</span><span class="text-slate-500 dark:text-slate-400">आ</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">ee</span><span class="text-slate-500 dark:text-slate-400">ई</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">oo</span><span class="text-slate-500 dark:text-slate-400">ऊ</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">ai</span><span class="text-slate-500 dark:text-slate-400">ऐ</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">au</span><span class="text-slate-500 dark:text-slate-400">औ</span></div>
+                    
+                    <!-- Additional Unique Mappings -->
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">ksha</span><span class="text-slate-500 dark:text-slate-400">क्ष</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">jna</span><span class="text-slate-500 dark:text-slate-400">ज्ञ</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">tra</span><span class="text-slate-500 dark:text-slate-400">त्र</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">ch</span><span class="text-slate-500 dark:text-slate-400">छ</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">jh</span><span class="text-slate-500 dark:text-slate-400">झ</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">ph</span><span class="text-slate-500 dark:text-slate-400">फ</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">bh</span><span class="text-slate-500 dark:text-slate-400">भ</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">gh</span><span class="text-slate-500 dark:text-slate-400">घ</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">dh</span><span class="text-slate-500 dark:text-slate-400">ध</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">S</span><span class="text-slate-500 dark:text-slate-400">ष</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">z</span><span class="text-slate-500 dark:text-slate-400">ज़</span></div>
+                    <div class="text-center p-2 rounded-lg bg-slate-50 dark:bg-slate-700"><span class="block text-lg font-bold text-blue-600 dark:text-blue-400">f</span><span class="text-slate-500 dark:text-slate-400">फ़</span></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Dark mode toggle
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+        }
+
+        const typingArea = document.getElementById('typingArea');
+        const charCount = document.getElementById('charCount');
+
+        // Comprehensive Roman to Nepali phonetic mapping
+        // Ordered by length (longest first) for proper matching
+        const phoneticMap = [
+            // 4-character sequences
+            { roman: 'ksha', devanagari: 'क्ष' },
+            { roman: 'jnaa', devanagari: 'ज्ञ' },
+            
+            // 3-character sequences  
+            { roman: 'tra', devanagari: 'त्र' },
+            { roman: 'ksh', devanagari: 'क्ष' },
+            { roman: 'jna', devanagari: 'ज्ञ' },
+            
+            // 2-character vowel combinations
+            { roman: 'aa', devanagari: 'आ' },
+            { roman: 'ee', devanagari: 'ई' },
+            { roman: 'oo', devanagari: 'ऊ' },
+            { roman: 'ai', devanagari: 'ऐ' },
+            { roman: 'au', devanagari: 'औ' },
+            { roman: 'kh', devanagari: 'ख' },
+            { roman: 'gh', devanagari: 'घ' },
+            { roman: 'ch', devanagari: 'छ' },
+            { roman: 'jh', devanagari: 'झ' },
+            { roman: 'th', devanagari: 'थ' },
+            { roman: 'dh', devanagari: 'ध' },
+            { roman: 'ph', devanagari: 'फ' },
+            { roman: 'bh', devanagari: 'भ' },
+            { roman: 'sh', devanagari: 'श' },
+            
+            // 1-character vowels
+            { roman: 'a', devanagari: 'अ' },
+            { roman: 'A', devanagari: 'आ' },
+            { roman: 'i', devanagari: 'इ' },
+            { roman: 'I', devanagari: 'ई' },
+            { roman: 'u', devanagari: 'उ' },
+            { roman: 'U', devanagari: 'ऊ' },
+            { roman: 'e', devanagari: 'ए' },
+            { roman: 'E', devanagari: 'ए' },
+            { roman: 'o', devanagari: 'ओ' },
+            { roman: 'O', devanagari: 'औ' },
+            
+            // 1-character consonants
+            { roman: 'k', devanagari: 'क' },
+            { roman: 'g', devanagari: 'ग' },
+            { roman: 'c', devanagari: 'च' },
+            { roman: 'j', devanagari: 'ज' },
+            { roman: 't', devanagari: 'त' },
+            { roman: 'd', devanagari: 'द' },
+            { roman: 'n', devanagari: 'न' },
+            { roman: 'p', devanagari: 'प' },
+            { roman: 'b', devanagari: 'ब' },
+            { roman: 'm', devanagari: 'म' },
+            { roman: 'y', devanagari: 'य' },
+            { roman: 'r', devanagari: 'र' },
+            { roman: 'l', devanagari: 'ल' },
+            { roman: 'v', devanagari: 'व' },
+            { roman: 'w', devanagari: 'व' },
+            { roman: 's', devanagari: 'स' },
+            { roman: 'S', devanagari: 'ष' },
+            { roman: 'h', devanagari: 'ह' },
+            
+            // Special
+            { roman: 'q', devanagari: 'क़' },
+            { roman: 'Q', devanagari: 'ख़' },
+            { roman: 'z', devanagari: 'ज़' },
+            { roman: 'f', devanagari: 'फ़' },
+            { roman: 'Z', devanagari: 'य़' },
+        ];
+
+        // Vowel matras (signs)
+        const matraMap = {
+            'a': '', 'A': 'ा', 'aa': 'ा', 
+            'i': 'ि', 'I': 'ी', 'ii': 'ी', 'ee': 'ी',
+            'u': 'ु', 'U': 'ू', 'uu': 'ू', 'oo': 'ू',
+            'e': 'े', 'E': 'ै', 'ai': 'ै', 
+            'o': 'ो', 'O': 'ौ', 'au': 'ौ'
+        };
+
+        typingArea.addEventListener('input', function(e) {
+            const currentValue = this.value;
+            const cursorPos = this.selectionStart;
+            
+            const converted = convertToNepali(currentValue);
+            
+            if (converted !== currentValue) {
+                const before = currentValue.substring(0, cursorPos);
+                const beforeConverted = convertToNepali(before);
+                
+                this.value = converted;
+                
+                let newCursorPos = cursorPos + (beforeConverted.length - before.length);
+                if (newCursorPos > converted.length) newCursorPos = converted.length;
+                if (newCursorPos < 0) newCursorPos = 0;
+                
+                this.setSelectionRange(newCursorPos, newCursorPos);
+            }
+            
+            charCount.innerText = `${converted.length} Characters`;
+        });
+
+        function convertToNepali(text) {
+            let result = "";
+            let i = 0;
+            const isVowel = (str) => ['a','e','i','o','u','A','E','I','O','U'].includes(str[0]);
+            let lastTokenType = 'space'; 
+
+            while (i < text.length) {
+                let match = null;
+                for (const entry of phoneticMap) {
+                    if (text.startsWith(entry.roman, i)) {
+                        match = entry;
+                        break;
+                    }
+                }
+                if (!match) {
+                    for (const entry of phoneticMap) {
+                        if (text.substr(i, entry.roman.length).toLowerCase() === entry.roman.toLowerCase()) {
+                            match = entry;
+                            break;
+                        }
+                    }
+                }
+
+                if (match) {
+                    let currentIsVowel = isVowel(match.roman);
+                    if (currentIsVowel) {
+                        if (lastTokenType === 'consonant') {
+                            let tokenMatched = text.substr(i, match.roman.length);
+                            let matra = matraMap[tokenMatched] !== undefined ? matraMap[tokenMatched] : 
+                                        (matraMap[tokenMatched.toLowerCase()] !== undefined ? matraMap[tokenMatched.toLowerCase()] : match.devanagari);
+                            result += matra;
+                        } else {
+                            result += match.devanagari;
+                        }
+                        lastTokenType = 'vowel';
+                    } else {
+                        if (lastTokenType === 'consonant') {
+                            result += '्'; // halant to join consecutive consonants
+                        }
+                        result += match.devanagari;
+                        lastTokenType = 'consonant';
+                    }
+                    i += match.roman.length;
+                } else {
+                    result += text[i];
+                    lastTokenType = text[i].trim() === '' ? 'space' : 'other';
+                    i++;
+                }
+            }
+            return result;
+        }
+
+        function copyToClipboard() {
+            typingArea.select();
+            document.execCommand('copy');
+            const btn = event.currentTarget;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = 'Copied!';
+            btn.classList.replace('bg-blue-600', 'bg-emerald-600');
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.replace('bg-emerald-600', 'bg-blue-600');
+            }, 2000);
+        }
+
+        function clearText() {
+            if(confirm('Clear all text?')) {
+                typingArea.value = '';
+                charCount.innerText = '0 Characters';
+                typingArea.focus();
+            }
+        }
+    </script>
+</body>
+</html>
