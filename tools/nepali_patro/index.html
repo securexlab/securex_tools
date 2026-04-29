@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepali Patro 2083 | Official Nepali Calendar & Events</title>
+    <meta name="description" content="Official Nepali Calendar for 2083 BS. View daily Tithi, public holidays, and festivals in Nepal. Fast, private, and always up to date.">
+    <meta name="keywords" content="Nepali Patro 2083, Nepali Calendar, Today Tithi Nepal, Public Holidays Nepal 2083, Baishakh 2083 Calendar, SecureX Lab">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://tools.securexlab.com/tools/nepali-patro/">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class' };
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 min-h-screen flex flex-col text-slate-900 dark:text-white transition-colors">
+
+    <nav class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="../../index.html" class="text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 flex items-center gap-1 transition-all group cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform group-hover:-translate-x-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                    </svg>
+                    Back to Hub
+                </a>
+                <span class="h-6 w-[1px] bg-slate-200 dark:bg-slate-600"></span>
+                <a href="../../index.html" class="font-bold text-slate-800 dark:text-white tracking-tight hover:opacity-80 transition-opacity cursor-pointer">SecureX Lab <span class="text-blue-600">Tools</span></a>
+            </div>
+            <button onclick="toggleDarkMode()" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">
+                <svg id="sunIcon" class="w-5 h-5 text-slate-600 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <svg id="moonIcon" class="w-5 h-5 text-yellow-400 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-5xl mx-auto w-full px-4 py-8">
+        
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8 bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+            <div>
+                <h1 class="text-2xl font-bold tracking-tight">Nepali Patro & Events</h1>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1" id="currentDateDisplay">Loading today's date...</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <select id="yearSelect" class="bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-blue-500 transition-all font-semibold"></select>
+                <select id="monthSelect" class="bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-blue-500 transition-all font-semibold"></select>
+                <button onclick="loadCalendarData()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition-all">Show</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <div class="lg:col-span-2">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
+                    <div class="calendar-grid bg-slate-100 dark:bg-slate-700 text-center text-xs font-bold uppercase tracking-widest py-3 border-b border-slate-200 dark:border-slate-600">
+                        <div class="text-red-500">Sun</div>
+                        <div>Mon</div>
+                        <div>Tue</div>
+                        <div>Wed</div>
+                        <div>Thu</div>
+                        <div>Fri</div>
+                        <div class="text-red-500">Sat</div>
+                    </div>
+                    <div id="calendarGrid" class="calendar-grid min-h-[400px]">
+                        </div>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
+                    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                        Festivals & Holidays
+                    </h3>
+                    <ul id="eventList" class="space-y-3">
+                        </ul>
+                </div>
+                
+                <div class="p-6 bg-blue-50 dark:bg-blue-900/20 rounded-2xl border border-blue-100 dark:border-blue-800">
+                    <p class="text-xs text-blue-700 dark:text-blue-400 font-medium">Data provided by Open Nepali Calendar API. All times are based on Nepal Standard Time (NST).</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+        }
+
+        const months = ["Baishakh", "Jestha", "Ashadh", "Shrawan", "Bhadra", "Ashwin", "Kartik", "Mangsir", "Poush", "Magh", "Falgun", "Chaitra"];
+        const yearSelect = document.getElementById('yearSelect');
+        const monthSelect = document.getElementById('monthSelect');
+        const calendarGrid = document.getElementById('calendarGrid');
+        const eventList = document.getElementById('eventList');
+        const currentDateDisplay = document.getElementById('currentDateDisplay');
+
+        // Populate Selects
+        for (let y = 2075; y <= 2085; y++) {
+            let opt = document.createElement('option');
+            opt.value = y; opt.innerText = y;
+            yearSelect.appendChild(opt);
+        }
+        months.forEach((m, i) => {
+            let opt = document.createElement('option');
+            opt.value = i + 1; opt.innerText = m;
+            monthSelect.appendChild(opt);
+        });
+
+        // Set Default to 2080
+        yearSelect.value = 2080;
+        monthSelect.value = 1;
+
+        async function loadCalendarData() {
+            const year = yearSelect.value;
+            const month = monthSelect.value;
+            const url = `https://the-value-crew.github.io/nepali-calendar-api/data/${year}/${month}.json`;
+
+            calendarGrid.innerHTML = '<div class="col-span-7 flex justify-center items-center py-20"><div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div></div>';
+            eventList.innerHTML = '';
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error("Data not found");
+                const data = await response.json();
+                renderCalendar(data);
+            } catch (error) {
+                calendarGrid.innerHTML = `
+                    <div class="col-span-7 text-center py-20">
+                        <svg class="w-12 h-12 text-slate-300 dark:text-slate-600 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <p class="text-slate-600 dark:text-slate-300 font-bold">Data Unavailable for ${year} BS</p>
+                        <p class="text-sm text-slate-500 mt-1">The calendar API database does not have records for this specific month.</p>
+                    </div>`;
+                currentDateDisplay.innerText = "Data Pending Update";
+            }
+        }
+
+        function renderCalendar(data) {
+            calendarGrid.innerHTML = '';
+            const days = data.days;
+            
+            // Add Empty Offsets
+            const startDay = parseInt(days[0].d); 
+            // The API uses day index (0=Sun, 1=Mon, etc). Adjust if needed depending on API shifts.
+            for (let i = 0; i < startDay; i++) {
+                calendarGrid.innerHTML += `<div class="border-b border-r border-slate-100 dark:border-slate-700 bg-slate-50/30 dark:bg-slate-900/30"></div>`;
+            }
+
+            // Render Days
+            days.forEach(day => {
+                const isHoliday = day.h === true || day.d === "6" || day.d === 6; // Check for Saturday
+
+                // Only render Tithi HTML if the API actually provided it
+                let tithiHtml = '';
+                if (day.t && day.t.trim() !== '') {
+                    tithiHtml = `<div class="text-[10px] text-slate-500 dark:text-slate-400 mt-1 truncate" title="${day.t}">${day.t}</div>`;
+                }
+
+                calendarGrid.innerHTML += `
+                    <div class="border-b border-r border-slate-100 dark:border-slate-700 p-2 h-24 transition-all hover:bg-slate-50 dark:hover:bg-slate-700/50 relative">
+                        <span class="absolute top-1 right-2 text-[10px] font-bold text-slate-400">${day.e}</span>
+                        <div class="text-xl font-bold ${isHoliday ? 'text-red-500' : 'text-slate-800 dark:text-white'}">${day.n}</div>
+                        ${tithiHtml}
+                    </div>
+                `;
+            });
+
+            // Clean & Render Events Sidebar
+            // Filter out empty strings that the API might accidentally send
+            const validEvents = data.holiFest ? data.holiFest.filter(ev => typeof ev === 'string' && ev.trim() !== '') : [];
+
+            if (validEvents.length > 0) {
+                validEvents.forEach(ev => {
+                    let eventText = ev;
+                    let eventDay = "-";
+                    
+                    // Safely split "१ गते Festival Name"
+                    let parts = ev.split(" गते ");
+                    if(parts.length > 1) {
+                        eventDay = parts[0].trim();
+                        eventText = parts[1].trim();
+                    }
+
+                    eventList.innerHTML += `
+                        <li class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-700/50 border border-slate-100 dark:border-slate-600">
+                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-[10px] px-2 py-1 rounded-md font-bold shrink-0">Day ${eventDay}</span>
+                            <span class="text-sm font-medium leading-tight">${eventText}</span>
+                        </li>
+                    `;
+                });
+            } else {
+                // Professional fallback UI when data is missing
+                eventList.innerHTML = `
+                    <li class="p-4 text-center border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+                        <span class="block text-sm text-slate-500 dark:text-slate-400">Event data not provided by API for this month.</span>
+                    </li>`;
+            }
+
+            // Set current date string safely
+            const enMonthStr = data.metadata ? data.metadata.en : (data.enMonth || "");
+            currentDateDisplay.innerText = `${months[monthSelect.value-1]} ${yearSelect.value} ${enMonthStr ? `(${enMonthStr})` : ''}`;
+        }
+
+        // Initial Load
+        loadCalendarData();
+    </script>
+</body>
+</html>
