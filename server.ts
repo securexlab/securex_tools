@@ -1,10 +1,13 @@
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import { createServer as createViteServer } from "vite";
 import multer from "multer";
 import axios from "axios";
 import FormData from "form-data";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -242,6 +245,21 @@ async function startServer() {
   // Heatlh check
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok" });
+  });
+
+  // Custom error handler for Multer and other unhandled errors.
+  // This MUST be defined after all other app.use() and routes.
+  app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+    if (err instanceof multer.MulterError) {
+      if (err.code === 'LIMIT_FILE_SIZE') {
+        return res.status(413).json({ error: 'File too large. Maximum size is 3.5 MB.' });
+      }
+      return res.status(400).json({ error: `File upload error: ${err.message}` });
+    } else if (err) {
+      console.error("An unhandled error occurred:", err);
+      return res.status(500).json({ error: 'An unexpected server error occurred. Please try again.' });
+    }
+    next();
   });
 
   // Vite middleware for development

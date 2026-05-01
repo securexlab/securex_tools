@@ -69,8 +69,16 @@ export default function ExcelToPdf() {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to convert Excel file");
+        let errorMsg = `Conversion failed with status: ${response.status}`;
+        try {
+          const errorData = await response.json();
+          errorMsg = errorData.error || errorMsg;
+        } catch (e) {
+          // Not a JSON error, maybe plain text or HTML from the server
+          const textError = await response.text();
+          errorMsg = textError.substring(0, 200) || errorMsg;
+        }
+        throw new Error(errorMsg);
       }
 
       const blob = await response.blob();
