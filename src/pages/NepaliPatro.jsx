@@ -78,7 +78,19 @@ export default function NepaliPatro() {
       ];
 
       const responses = await Promise.all(urls.map(url => fetch(url)));
-      const dataResults = await Promise.all(responses.map(res => res.ok ? res.json() : { days: [] }));
+      
+      // Check if any response is not ok
+      for (const res of responses) {
+        if (!res.ok) {
+          const errorData = await res.json().catch(() => ({}));
+          if (errorData.code === 'ECONNABORTED') {
+            throw new Error("The API took too long to respond. This usually happens when the backend is 'waking up'. Please try again in a few seconds.");
+          }
+          throw new Error(errorData.error || "Failed to fetch calendar data from the cosmic records.");
+        }
+      }
+
+      const dataResults = await Promise.all(responses.map(res => res.json()));
       
       const allDaysRaw = dataResults.flatMap(r => r.days || []);
       const uniqueDaysMap = new Map();
@@ -173,6 +185,8 @@ export default function NepaliPatro() {
             fetchCalendarData(selectedYear, selectedMonth);
           }
         } else {
+          const errorData = await resp.json().catch(() => ({}));
+          console.error("Today fetch returned error status", resp.status, errorData);
           fetchCalendarData(selectedYear, selectedMonth);
         }
       } catch (err) {
