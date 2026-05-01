@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #2563eb;
+  --color-primary-dark: #1d4ed8;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 transition-colors duration-300 font-sans antialiased;
+  }
+  
+  html.dark body {
+    @apply bg-slate-950 text-slate-50;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white border border-slate-200 shadow-sm rounded-xl overflow-hidden transition-all duration-200;
+  }
+  
+  .dark .glass-card {
+    @apply bg-slate-900 border-slate-800 shadow-none;
+  }
+
+  .nav-label {
+    @apply text-[10px] uppercase tracking-widest text-slate-400 font-semibold mb-3 px-3;
+  }
+
+  .sidebar-link {
+    @apply px-3 py-2 text-sm text-slate-600 hover:bg-slate-50 rounded-md cursor-pointer transition-colors flex items-center gap-2;
+  }
+
+  .dark .sidebar-link {
+    @apply text-slate-400 hover:bg-slate-900 hover:text-slate-100;
+  }
+
+  .sidebar-link-active {
+    @apply bg-blue-50 text-blue-700 font-medium;
+  }
+
+  .dark .sidebar-link-active {
+    @apply bg-blue-900/20 text-blue-400;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-200 rounded-full;
+}
+.dark ::-webkit-scrollbar-thumb {
+  @apply bg-slate-800;
+}
