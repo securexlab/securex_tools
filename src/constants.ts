@@ -5,7 +5,8 @@ import {
   ShieldCheck, 
   Share2 as Social, 
   Wrench as Utils,
-  FileText
+  FileText,
+  Merge2
 } from "lucide-react";
 
 export const TOOLS = [
@@ -17,7 +18,8 @@ export const TOOLS = [
       { name: "PDF to Word", path: "/pdf-to-word", desc: "Convert PDF to editable .docx" },
       { name: "Word to PDF", path: "/word-to-pdf", desc: "Convert .doc/.docx to PDF" },
       { name: "Excel to PDF", path: "/excel-to-pdf", desc: "Convert .xlsx/.xls to PDF" },
-      { name: "PPT to PDF", path: "/ppt-to-pdf", desc: "Convert .pptx/.ppt to PDF" }
+      { name: "PPT to PDF", path: "/ppt-to-pdf", desc: "Convert .pptx/.ppt to PDF" },
+      { name: "Document Merger", path: "/file-merger", desc: "Combine PDF, Word & PowerPoint" }
     ]
   },
   {

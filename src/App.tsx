@@ -40,6 +40,7 @@ import PdfToWord from "./pages/PdfToWord";
 import WordToPdf from "./pages/WordToPdf";
 import ExcelToPdf from "./pages/ExcelToPdf";
 import PptToPdf from "./pages/PptToPdf";
+import FileMerger from "./pages/file-merger";
 
 // Legal Pages
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -89,6 +90,7 @@ export default function App() {
           <Route path="/word-to-pdf" element={<WordToPdf />} />
           <Route path="/excel-to-pdf" element={<ExcelToPdf />} />
           <Route path="/ppt-to-pdf" element={<PptToPdf />} />
+          <Route path="/file-merger" element={<FileMerger />} />
 
           {/* Legal Pages */}
           <Route path="/privacy" element={<PrivacyPolicy />} />

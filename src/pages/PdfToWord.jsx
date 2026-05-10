@@ -62,13 +62,17 @@ export default function PdfToWord() {
 
       if (!response.ok) {
         let errorMsg = `Conversion failed with status: ${response.status}`;
+        const contentType = response.headers.get('content-type');
         try {
-          const errorData = await response.json();
-          errorMsg = errorData.error || errorMsg;
+          if (contentType && contentType.includes('application/json')) {
+            const errorData = await response.json();
+            errorMsg = errorData.error || errorMsg;
+          } else {
+            const textError = await response.text();
+            errorMsg = textError.substring(0, 200) || errorMsg;
+          }
         } catch (e) {
-          // Not a JSON error, maybe plain text or HTML from the server
-          const textError = await response.text();
-          errorMsg = textError.substring(0, 200) || errorMsg;
+          errorMsg = `Conversion failed with status: ${response.status}`;
         }
         throw new Error(errorMsg);
       }

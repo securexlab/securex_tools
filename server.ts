@@ -9,6 +9,29 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+// Helper function to get error message from error response
+function getErrorMessage(error: any): string {
+  if (!error) return "Unknown error";
+  
+  if (error.response?.data) {
+    const data = error.response.data;
+    // If it's a Buffer or binary data, convert to string safely
+    if (Buffer.isBuffer(data)) {
+      try {
+        return data.toString('utf-8').substring(0, 500);
+      } catch (e) {
+        return `API Error (status ${error.response.status}): ${error.response.statusText || 'Unknown'}`;
+      }
+    } else if (typeof data === 'string') {
+      return data.substring(0, 500);
+    } else if (typeof data === 'object' && data.error) {
+      return String(data.error).substring(0, 500);
+    }
+  }
+  
+  return error.message || "Unknown error";
+}
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -20,6 +43,12 @@ async function startServer() {
   const upload = multer({
     storage: multer.memoryStorage(),
     limits: { fileSize: 3670016 }, // 3.5 MB limit
+  });
+
+  // Upload for multiple files (50 MB per file for merger)
+  const uploadMultiple = multer({
+    storage: multer.memoryStorage(),
+    limits: { fileSize: 50 * 1024 * 1024 }, // 50 MB per file
   });
 
   // API route for PDF to Word conversion
@@ -49,6 +78,7 @@ async function startServer() {
             Apikey: apiKey,
           },
           responseType: "arraybuffer",
+          timeout: 30000,
         }
       );
 
@@ -57,7 +87,7 @@ async function startServer() {
       res.send(response.data);
     } catch (error: any) {
       console.error("PDF Conversion Error:", error.message);
-      res.status(500).json({ error: "Failed to convert PDF. " + (error.response?.data?.toString() || error.message) });
+      res.status(error.response?.status || 500).json({ error: "Failed to convert PDF. " + getErrorMessage(error) });
     }
   });
 
@@ -88,6 +118,7 @@ async function startServer() {
             Apikey: apiKey,
           },
           responseType: "arraybuffer",
+          timeout: 30000,
         }
       );
 
@@ -96,7 +127,7 @@ async function startServer() {
       res.send(response.data);
     } catch (error: any) {
       console.error("Word Conversion Error:", error.message);
-      res.status(500).json({ error: "Failed to convert Word document. " + (error.response?.data?.toString() || error.message) });
+      res.status(error.response?.status || 500).json({ error: "Failed to convert Word document. " + getErrorMessage(error) });
     }
   });
 
@@ -127,6 +158,7 @@ async function startServer() {
             Apikey: apiKey,
           },
           responseType: "arraybuffer",
+          timeout: 30000,
         }
       );
 
@@ -135,7 +167,7 @@ async function startServer() {
       res.send(response.data);
     } catch (error: any) {
       console.error("Excel Conversion Error:", error.message);
-      res.status(500).json({ error: "Failed to convert Excel file. " + (error.response?.data?.toString() || error.message) });
+      res.status(error.response?.status || 500).json({ error: "Failed to convert Excel file. " + getErrorMessage(error) });
     }
   });
 
@@ -166,6 +198,7 @@ async function startServer() {
             Apikey: apiKey,
           },
           responseType: "arraybuffer",
+          timeout: 30000,
         }
       );
 
@@ -174,7 +207,7 @@ async function startServer() {
       res.send(response.data);
     } catch (error: any) {
       console.error("PPT Conversion Error:", error.message);
-      res.status(500).json({ error: "Failed to convert PowerPoint file. " + (error.response?.data?.toString() || error.message) });
+      res.status(error.response?.status || 500).json({ error: "Failed to convert PowerPoint file. " + getErrorMessage(error) });
     }
   });
 
@@ -187,13 +220,22 @@ async function startServer() {
       }
 
       const response = await axios.get(
-        `https://securex-parva-api.onrender.com/api/festivals/calendar/${year}/${month}`
+        `https://securex-parva-api.onrender.com/api/festivals/calendar/${year}/${month}`,
+        { timeout: 15000 }
       );
       res.json(response.data);
     } catch (error: any) {
       console.error("Patro Proxy Error:", error.message);
-      res.status(error.response?.status || 500).json({ 
-        error: "Failed to fetch calendar data",
+      
+      let errorMsg = "Failed to fetch calendar data";
+      if (error.code === 'ECONNABORTED' || error.code === 'ETIMEDOUT') {
+        errorMsg = "The API took too long to respond. This usually happens when the backend is waking up. Please try again in a few seconds.";
+      } else if (error.code === 'ENOTFOUND' || error.code === 'ECONNREFUSED') {
+        errorMsg = "Unable to connect to calendar service. Please check your internet connection.";
+      }
+      
+      res.status(error.response?.status || 503).json({ 
+        error: errorMsg,
         details: error.response?.data || error.message 
       });
     }
@@ -205,13 +247,20 @@ async function startServer() {
       const { year, month, day } = req.query;
       const date = `${year}-${month.toString().padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
       const response = await axios.get(
-        `https://securex-parva-api.onrender.com/api/calendar/convert?date=${date}`
+        `https://securex-parva-api.onrender.com/api/calendar/convert?date=${date}`,
+        { timeout: 15000 }
       );
       res.json(response.data);
     } catch (error: any) {
       console.error("AD to BS Proxy Error:", error.message);
-      res.status(error.response?.status || 500).json({ 
-        error: "Conversion failed",
+      
+      let errorMsg = "Conversion failed";
+      if (error.code === 'ECONNABORTED' || error.code === 'ETIMEDOUT') {
+        errorMsg = "The API took too long to respond. Please try again.";
+      }
+      
+      res.status(error.response?.status || 503).json({ 
+        error: errorMsg,
         details: error.response?.data || error.message
       });
     }
@@ -222,29 +271,157 @@ async function startServer() {
     try {
       const response = await axios.post(
         "https://securex-parva-api.onrender.com/api/calendar/bs-to-gregorian",
-        req.body
+        req.body,
+        { timeout: 15000 }
       );
       res.json(response.data);
     } catch (error: any) {
       console.error("BS to AD Proxy Error:", error.message);
-      res.status(error.response?.status || 500).json({ error: "Conversion failed" });
+      
+      let errorMsg = "Conversion failed";
+      if (error.code === 'ECONNABORTED' || error.code === 'ETIMEDOUT') {
+        errorMsg = "The API took too long to respond. Please try again.";
+      }
+      
+      res.status(error.response?.status || 503).json({ error: errorMsg });
     }
   });
 
   // API route for Today's date
   app.get("/api/today", async (req, res) => {
     try {
-      const response = await axios.get("https://securex-parva-api.onrender.com/api/calendar/today");
+      const response = await axios.get("https://securex-parva-api.onrender.com/api/calendar/today", { timeout: 15000 });
       res.json(response.data);
     } catch (error: any) {
       console.error("Today Proxy Error:", error.message);
-      res.status(error.response?.status || 500).json({ error: "Failed to fetch today date" });
+      
+      let errorMsg = "Failed to fetch today date";
+      if (error.code === 'ECONNABORTED' || error.code === 'ETIMEDOUT') {
+        errorMsg = "The API took too long to respond. Please try again.";
+      }
+      
+      res.status(error.response?.status || 503).json({ error: errorMsg });
     }
   });
 
   // Heatlh check
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok" });
+  });
+
+  // API route for Document Merger
+  app.post("/api/merge", uploadMultiple.array("files"), async (req, res) => {
+    try {
+      if (!req.files || req.files.length === 0) {
+        return res.status(400).json({ error: "No files uploaded" });
+      }
+
+      const files = req.files as Express.Multer.File[];
+
+      if (files.length < 2) {
+        return res.status(400).json({
+          error: "Please upload at least 2 files to merge",
+        });
+      }
+
+      const apiKey = process.env.CLOUDMERSIVE_API_KEY;
+      if (!apiKey) {
+        return res.status(500).json({ error: "Cloudmersive API key not configured" });
+      }
+
+      console.log(`[Merge] Processing ${files.length} files...`);
+
+      // Process each file: convert to PDF if needed
+      const pdfBuffers: Buffer[] = [];
+
+      for (const file of files) {
+        try {
+          const fileName = file.originalname || file.filename;
+          const ext = fileName.split(".").pop()?.toLowerCase();
+
+          if (ext === "pdf") {
+            // Already a PDF, use as-is
+            pdfBuffers.push(file.buffer);
+            console.log(`[Merge] Using PDF file: ${fileName}`);
+          } else {
+            // Convert to PDF using Cloudmersive Auto-Detect
+            console.log(`[Merge] Converting ${ext?.toUpperCase()} to PDF: ${fileName}`);
+            const formData = new FormData();
+            formData.append("inputFile", file.buffer, {
+              filename: fileName,
+              contentType: file.mimetype,
+            });
+
+            const conversionResponse = await axios.post(
+              "https://api.cloudmersive.com/convert/autodetect/to/pdf",
+              formData,
+              {
+                headers: {
+                  ...formData.getHeaders(),
+                  Apikey: apiKey,
+                },
+                responseType: "arraybuffer",
+                timeout: 60000,
+              }
+            );
+
+            pdfBuffers.push(Buffer.from(conversionResponse.data));
+          }
+        } catch (error: any) {
+          console.error(`Error processing file:`, error.message);
+          throw error;
+        }
+      }
+
+      if (pdfBuffers.length === 0) {
+        return res.status(400).json({ error: "No valid files to merge" });
+      }
+
+      // Merge all PDFs
+      console.log(`[Merge] Merging ${pdfBuffers.length} PDF files...`);
+      const mergeFormData = new FormData();
+
+      pdfBuffers.forEach((buffer, index) => {
+        mergeFormData.append("inputFiles", buffer, `document-${index + 1}.pdf`);
+      });
+
+      const mergeResponse = await axios.post(
+        "https://api.cloudmersive.com/convert/merge/pdf/multi",
+        mergeFormData,
+        {
+          headers: {
+            ...mergeFormData.getHeaders(),
+            Apikey: apiKey,
+          },
+          responseType: "arraybuffer",
+          timeout: 60000,
+        }
+      );
+
+      // Return the merged PDF
+      res.setHeader("Content-Type", "application/pdf");
+      res.setHeader(
+        "Content-Disposition",
+        `attachment; filename="merged-${Date.now()}.pdf"`
+      );
+      res.send(Buffer.from(mergeResponse.data));
+    } catch (error: any) {
+      console.error("[Merge API Error]:", error.message);
+
+      let errorMsg = "Failed to merge documents";
+      if (error.response?.status === 401) {
+        errorMsg = "API key is invalid";
+      } else if (error.response?.status === 429) {
+        errorMsg = "Too many requests. Please try again later.";
+      } else if (error.message?.includes("timeout")) {
+        errorMsg = "Request timeout. Files may be too large or server is busy.";
+      }
+
+      res.status(error.response?.status || 500).json({
+        error: errorMsg,
+        details: error.message,
+      });
+    }
   });
 
   // Custom error handler for Multer and other unhandled errors.
