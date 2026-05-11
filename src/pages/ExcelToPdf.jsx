@@ -1,8 +1,6 @@
 import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
 import { Table, Download, Upload, Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
 import BackButton from "../components/BackButton";
-import ToolSeoSection from "../components/ToolSeoSection";
 import { cn } from "../lib/utils";
 
 export default function ExcelToPdf() {
@@ -200,17 +198,37 @@ export default function ExcelToPdf() {
         </div>
       </div>
 
-      {/* SEO Optimized Publisher Content */}
-      <div className="prose prose-slate dark:prose-invert max-w-4xl mx-auto mt-16 p-8 bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800">
-        <h2>How the Excel to PDF Converter Works</h2>
-        <p>Combining and sharing financial data, attendance logs, or raw datasets often requires converting spreadsheets into a stable, non-editable format. The Excel to PDF Converter streamlines this workflow by accepting standard Microsoft Excel formats (.xls, .xlsx) and programmatically generating high-quality, professional PDF documents.</p>
-        <h3>The Spreadsheet Conversion Logic</h3>
-        <p>Under the hood, this tool utilizes advanced file parsing to handle binary data securely. When you upload an Excel spreadsheet, the system reads the binary buffer of the file and initiates an auto-detect conversion protocol. It programmatically renders the grid structures, charts, and typography into a standardized PDF format. This algorithmic standardization ensures that complex table layouts and cell formatting are preserved exactly as they appeared in your original workbook.</p>
-        <h3>Why Use a Dedicated File Converter?</h3>
-        <p>Managing raw spreadsheet files often leads to disorganized communication and formatting errors when opened on different devices or incompatible office software. By converting your data into a locked PDF, you guarantee cross-platform compatibility. PDFs are universally supported, meaning your financial reports or attendance sheets will render identically on any operating system. To prioritize your privacy, the converted binary buffer is streamed directly back to your browser as a downloadable blob without permanently storing sensitive business data.</p>
-        <hr className="my-8 border-slate-200 dark:border-slate-800" />
-        <h3>Related Reading</h3>
-        <p>Want to learn more about the privacy implications of online file processing? Check out our detailed guide: <Link to="/blog/why-secure-file-conversion-matters" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-semibold transition-colors duration-200">Why Secure File Conversion Matters</Link>.</p>
+      {/* SEO Content Section */}
+      <div className="mt-16 pt-16 border-t border-slate-200 dark:border-slate-800">
+        <div className="max-w-3xl mx-auto space-y-10">
+          <section className="space-y-4">
+            <h2 className="text-2xl font-bold">Reliable Excel to PDF Tool</h2>
+            <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-lg">
+              Generate clean, professional PDF reports from your Excel data. Our tool handles layout adjustments to ensure your columns and charts fits perfectly within the PDF page boundaries.
+            </p>
+          </section>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-8 bg-emerald-50 dark:bg-emerald-900/10 rounded-3xl border border-emerald-100 dark:border-emerald-900/30 space-y-4">
+              <h3 className="font-bold text-lg text-emerald-900 dark:text-emerald-100 flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5" />
+                Precision Scaling
+              </h3>
+              <p className="text-sm text-emerald-800/70 dark:text-emerald-400/70 leading-relaxed">
+                Automatically adjusts the scale of your spreadsheets to prevent data from being cut off at the edges of the PDF document.
+              </p>
+            </div>
+            <div className="p-8 bg-blue-50 dark:bg-blue-900/10 rounded-3xl border border-blue-100 dark:border-blue-900/30 space-y-4">
+              <h3 className="font-bold text-lg text-blue-900 dark:text-blue-100 flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5" />
+                Secure Processing
+              </h3>
+              <p className="text-sm text-blue-800/70 dark:text-blue-400/70 leading-relaxed">
+                Your financial data and business reports are safe. We use encrypted connections and never store your files after conversion.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { Copy, Check, Hash as HashIcon, ArrowRight, ShieldCheck, Lock } from "lucide-react";
 import { cn } from "../lib/utils";
 import BackButton from "../components/BackButton";
@@ -90,16 +89,52 @@ export default function HashEncoder() {
         </div>
       </div>
 
-      {/* SEO Optimized Publisher Content */}
-      <div className="prose prose-slate dark:prose-invert max-w-4xl mx-auto mt-16 p-8 bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800">
-        <h2>Understanding Cryptographic Hashing and Encoding</h2>
-        <p>Data security and formatting require strict adherence to encoding standards and cryptographic algorithms. The Hash & Base64 Encoder is a dual-purpose developer utility that allows users to instantly transform plaintext into universally transportable Base64 strings, or generate 32-bit hash digests directly within the browser memory.</p>
-        <h3>Base64 Encoding vs. Hash Functions</h3>
-        <p>It is critical to distinguish between encoding and hashing. Base64 encoding translates binary or string data into a radix-64 representation, using only safe ASCII characters. This is a two-way, mathematically reversible process designed for safe data transport across networks, not for security. The tool utilizes the browser's native <code>btoa()</code> and <code>atob()</code> APIs to execute this instantly.</p>
-        <p>Conversely, hashing is a one-way mathematical trapdoor. The tool's secondary function employs a bitwise shifting algorithm to generate a numeric 32-bit hash. By iterating through the character codes and applying left-shift operations combined with subtraction, it triggers an "avalanche effect"—where a minor change in the input completely alters the resulting hexadecimal output. Because hashes cannot be reverse-engineered into their original plaintext, they are fundamentally distinct from encoded strings.</p>
-        <hr className="my-8 border-slate-200 dark:border-slate-800" />
-        <h3>Related Reading</h3>
-        <p>Want a deeper understanding of web security? Read our full guide: <Link to="/blog/cryptography-basics-hashing-vs-encryption" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-semibold transition-colors duration-200">Cryptography Basics: Hashing vs. Encryption</Link>.</p>
+      {/* SEO Content Section */}
+      <div className="mt-16 pt-16 border-t border-slate-200 dark:border-slate-800">
+        <div className="max-w-4xl mx-auto space-y-12">
+          <section className="space-y-4">
+            <h2 className="text-2xl font-bold">Why use our Hash & Base64 Tool?</h2>
+            <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-lg italic">
+              "Data integrity and secure encoding at your fingertips."
+            </p>
+            <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+              Whether you are a developer debugging API responses or a security enthusiast checking data integrity, our <strong>Hash & Base64 Encoder/Decoder</strong> provides a fast, client-side way to manipulate text strings. All processing happens right in your browser, meaning your data never leaves your device.
+            </p>
+          </section>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="p-8 bg-blue-600 rounded-[3rem] text-white space-y-4 shadow-xl shadow-blue-500/20">
+              <h3 className="font-bold text-lg flex items-center gap-2">
+                <Lock className="w-5 h-5 text-blue-200" />
+                Base64 Encoding
+              </h3>
+              <p className="text-xs opacity-90 leading-relaxed font-medium">
+                Base64 is a group of binary-to-text encoding schemes that represent binary data in an ASCII string format. It is commonly used when there is a need to encode binary data that needs to be stored and transferred over media that are designed to deal with textual data.
+              </p>
+            </div>
+            <div className="space-y-4">
+              <h3 className="font-bold text-xl text-slate-800 dark:text-slate-200">Common Use Cases</h3>
+              <ul className="text-sm text-slate-500 space-y-3 list-disc pl-4">
+                <li>Encoding URLs to safely pass data in query parameters.</li>
+                <li>Obfuscating sensitive text strings in configuration files.</li>
+                <li>Generating simple hashes to verify text hasn't been altered.</li>
+                <li>Decoding legacy data formats that use Base64.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="p-8 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2.5rem] flex items-start gap-4">
+            <div className="p-3 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 rounded-2xl">
+                <ShieldCheck className="w-6 h-6" />
+            </div>
+            <div>
+                <h4 className="font-bold mb-2">Privacy & Security First</h4>
+                <p className="text-sm text-slate-500 leading-relaxed">
+                   Unlike other online encoders that send your text to their servers, our tool uses <strong>JavaScript btoa() and atob()</strong> methods natively in your browser. This ensures that your private keys, passwords, or sensitive text strings are never intercepted or stored on any server.
+                </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

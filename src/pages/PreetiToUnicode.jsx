@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Keyboard, Copy, Check, Trash2, ArrowRightLeft, Info, HelpCircle } from "lucide-react";
 import { cn } from "../lib/utils";
 import BackButton from "../components/BackButton";
-import ToolSeoSection from "../components/ToolSeoSection";
 
 const preetiMap = [
     // Standard Characters
@@ -209,29 +207,64 @@ export default function PreetiToUnicode() {
                 </div>
             </div>
 
-      {/* SEO Optimized Publisher Content */}
-      <div className="prose prose-slate dark:prose-invert max-w-4xl mx-auto mt-16 p-8 bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800">
-        <h2>Understanding the Preeti to Unicode Conversion</h2>
-        <p>
-          Converting legacy Nepali text into modern, web-safe characters is critical for digital archiving, data entry, and seamless web development. This Preeti to Unicode Converter bridges the gap between historical desktop publishing software and the universal text standards required by modern web browsers, smartphones, and operating systems.
-        </p>
-        <h3>The Mechanics of ASCII to Unicode Mapping</h3>
-        <p>
-          In the early days of computing, operating systems lacked global language support. Legacy fonts like Preeti and Kantipur bypassed this limitation by using an ASCII "hack"—visually mapping Nepali character shapes onto standard English keystrokes. While this allowed users to type visually accurate Devanagari on a screen, the underlying binary data remained a string of random English letters.
-        </p>
-        <p>
-          Our algorithmic converter effectively reverses this process. It scans the input string and programmatically maps the legacy ASCII keystrokes to their permanent, universally recognized mathematical identifiers—known as the Unicode Standard. For example, instead of rendering the English letter "u" as "ग" via a localized font file, the engine correctly parses it and assigns the permanent Devanagari hex value of <code>U+0917</code>.
-        </p>
-        <h3>Why Unicode is Mandatory for the Web</h3>
-        <p>
-          Legacy font documents suffer from zero portability; if the recipient device lacks the specific font, the text breaks into gibberish. Furthermore, search engines like Google cannot index ASCII-hacked Nepali text, rendering your content entirely invisible to search queries. Converting your text to Unicode guarantees cross-platform rendering (Windows, macOS, iOS, Android) and ensures full search engine discoverability.
-        </p>
-        <hr className="my-8 border-slate-200 dark:border-slate-800" />
-        <h3>Related Reading</h3>
-        <p>
-          Curious about the technical history behind digital Devanagari? Read our full breakdown: <Link to="/blog/evolution-of-nepali-typography-preeti-to-unicode" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-semibold transition-colors duration-200">The Evolution of Nepali Typography: From Legacy Preeti to Universal Unicode</Link>.
-        </p>
-      </div>
+            {/* SEO Content Section */}
+            <div className="mt-16 pt-16 border-t border-slate-200 dark:border-slate-800">
+                <div className="max-w-3xl mx-auto space-y-10">
+                    <section className="space-y-4">
+                        <h2 className="text-2xl font-bold">Why Convert Preeti Font to Unicode?</h2>
+                        <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                            Preeti is a legacy legacy font for typing Nepali. While widely used in newsrooms and printing houses across Nepal, it is not web-ready. Text typed in Preeti font looks like gibberish (example: <strong>xfd|f]</strong>) on devices that don't have the font installed. 
+                        </p>
+                        <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                            <strong>Unicode Devanagari</strong>, on the other hand, is the global standard. Converting your Preeti text to Unicode ensures your content is readable on all mobile devices, tablets, and computers, making it perfect for Facebook, websites, and emails.
+                        </p>
+                    </section>
+
+                    <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm space-y-4">
+                            <h3 className="font-bold text-lg text-blue-600">Features of this Converter</h3>
+                            <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-3">
+                                <li className="flex items-start gap-2">
+                                    <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                                    <span><strong>Instant Conversion:</strong> Real-time translation as you type.</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                                    <span><strong>Smart Ligatures:</strong> Handles complex conjuncts and symbols (Alt-codes).</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                                    <span><strong>Clean Copy:</strong> One-click copy for social media sharing.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div className="p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm space-y-4">
+                            <h3 className="font-bold text-lg text-blue-600">Common Use Cases</h3>
+                            <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-3">
+                                <li className="flex items-start gap-2">
+                                    <Check className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
+                                    <span>Converting old Nepali Word documents to web format.</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <Check className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
+                                    <span>Posting Nepali news and articles to Facebook/Twitter.</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <Check className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
+                                    <span>Sending professional Nepali emails to gov offices.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                    
+                    <div className="p-6 bg-blue-50 dark:bg-blue-900/10 rounded-2xl border border-blue-100 dark:border-blue-900/30 text-center">
+                        <p className="text-sm text-blue-800/80 dark:text-blue-400/80 italic font-medium">
+                            "SecureX Lab tools provide the most accurate Preeti to Unicode conversion in Nepal, supporting all major symbols and Alt-code characters."
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

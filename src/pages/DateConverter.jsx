@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import NepaliDate from "nepali-date-converter";
 import { 
   ArrowRightLeft, 
@@ -283,28 +282,63 @@ export default function DateConverter() {
         </div>
       </div>
 
-      {/* SEO Optimized Publisher Content */}
-      <div className="prose prose-slate dark:prose-invert max-w-4xl mx-auto mt-16 p-8 bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800">
-        <h2>How the Bikram Sambat (BS) to AD Date Converter Works</h2>
-        <p>
-          Accurately converting dates between the Gregorian calendar (AD) and Nepal's official Bikram Sambat calendar (BS) is an essential utility for legal documentation, financial planning, and personal record-keeping. Unlike standard time-zone calculators that rely on simple linear time shifts, our Date Converter utilizes complex astronomical data algorithms to ensure precise, day-to-day accuracy.
-        </p>
-        <h3>The Mathematics of a Solar-Lunar Calendar</h3>
-        <p>
-          The core challenge in BS to AD conversion stems from the fundamental differences in how each calendar tracks a year. While the Gregorian calendar utilizes fixed leap years and entirely predictable month lengths, the Bikram Sambat system is solar-lunar. A month in the BS calendar is defined by the precise duration it takes the sun to transition through specific zodiac constellations.
-        </p>
-        <p>
-          Because the Earth's orbit is elliptical, this solar transition time naturally fluctuates. As a result, Nepali months—such as Baishakh or Kartik—can unpredictably shift between 29 and 32 days, and this specific variation changes every single year.
-        </p>
-        <h3>Backend Astronomical Engines</h3>
-        <p>
-          Due to these annual cosmic shifts, it is mathematically impossible to use a static mathematical formula for long-term AD to BS conversion. Instead, this tool queries a rigorous backend database of pre-calculated astronomical data specific to the requested year. This architecture guarantees that whether you are checking today's Tithi or aligning international business operations with the Nepali fiscal year, the converted date is cosmically and historically exact.
-        </p>
-        <hr className="my-8 border-slate-200 dark:border-slate-800" />
-        <h3>Related Reading</h3>
-        <p>
-          Want to learn more about the celestial mechanics behind the Nepali Patro? Check out our technical overview: <Link to="/blog/understanding-bikram-sambat" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-semibold transition-colors duration-200">Understanding the Bikram Sambat (BS) Calendar</Link>.
-        </p>
+      {/* SEO & Informational Section */}
+      <div className="max-w-7xl mx-auto px-6 py-20 border-t border-slate-100 dark:border-slate-800">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+          <div className="lg:col-span-2 space-y-12">
+            <section className="space-y-6">
+              <h2 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">Everything You Need to Know About Date Conversion</h2>
+              <p className="text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
+                Converting dates between the <strong className="text-slate-900 dark:text-white">Bikram Sambat (BS)</strong> and <strong className="text-slate-900 dark:text-white">Gregorian (AD)</strong> systems is a common necessity for Nepalese people worldwide. Our tool uses a high-precision algorithm based on the official Nepali calendar rules to ensure your legal documents, birthdays, and anniversaries are perfectly synchronized.
+              </p>
+            </section>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="p-8 bg-slate-50 dark:bg-slate-800/50 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 transition-all hover:border-blue-200">
+                <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4">Why is there a 56-year difference?</h3>
+                <p className="text-sm text-slate-600 dark:text-slate-400 leading-loose">
+                  The Bikram Sambat era was founded by King Vikramaditya and is approximately 56 years, 8 months, and 17 days ahead of the Gregorian calendar. Since it follows the solar cycle with lunar influence, the number of days in each month varies each year, unlike the fixed Gregorian months.
+                </p>
+              </div>
+              <div className="p-8 bg-slate-50 dark:bg-slate-800/50 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 transition-all hover:border-amber-200">
+                <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4">Data Integrity & Accuracy</h3>
+                <p className="text-sm text-slate-600 dark:text-slate-400 leading-loose">
+                  Our converter handles leap years in both systems flawlessly. We support historical date lookup back to 1944 AD (2000 BS) and future planning up to 2094 AD (2150 BS), making it ideal for genealogy research and long-term project planning.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-8">
+            <div className="p-10 bg-blue-600 rounded-[3rem] text-white space-y-6">
+              <h3 className="text-2xl font-black">Conversion Quick Tips</h3>
+              <ul className="space-y-4">
+                {[
+                  "Official documents usually require BS dates.",
+                  "International travel depends on AD dates.",
+                  "Tithis are calculated at sunrise.",
+                  "Advisory: Always double-check legal forms."
+                ].map((tip, i) => (
+                  <li key={i} className="flex gap-3 text-sm font-bold opacity-90">
+                    <div className="w-1.5 h-1.5 bg-white rounded-full mt-1.5 shrink-0" />
+                    {tip}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {[
+                "ADtoBS", "BikramSambat", "DateConverter", "NepalCalendar", 
+                "GregorianConversion", "NepaliPatro", "Accuracy", "TithiConversion"
+              ].map(tag => (
+                <span key={tag} className="px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-full text-[10px] font-black uppercase text-slate-500 tracking-widest">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

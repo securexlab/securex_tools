@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { UserCheck, ShieldAlert, CheckCircle2, XCircle, Info } from "lucide-react";
 import { cn } from "../lib/utils";
 import BackButton from "../components/BackButton";
@@ -163,16 +162,48 @@ export default function LokSewaAge() {
         </div>
       </div>
 
-      {/* SEO Optimized Publisher Content */}
-      <div className="prose prose-slate dark:prose-invert max-w-4xl mx-auto mt-16 p-8 bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800">
-        <h2>Verifying Age Eligibility for Civil Service Exams</h2>
-        <p>Applying for government positions in Nepal requires strict adherence to age boundaries established by the Public Service Commission (Lok Sewa Aayog). The Lok Sewa Age Checker is a specialized chronological utility that instantly validates a candidate's age against precise bureaucratic regulations, accounting for gender and specific service categories.</p>
-        <h3>Date Mathematics and Conditional Logic</h3>
-        <p>At the heart of the application is a rigorous date subtraction algorithm. The system captures the applicant's Date of Birth (DOB) and compares it to the current temporal timestamp. It extracts the absolute difference in years, dynamically adjusting for the specific month and day to prevent premature age inflation (e.g., ensuring a person is not counted as a year older until their exact birth month and day have passed).</p>
-        <p>Once the exact integer age is determined, the engine applies layered conditional logic. It evaluates the boolean states of the user's selected parameters: standard male limits (18-35 years), female/disabled limits (up to 40 years), and health service exceptions (up to 45 years). By parsing these overlapping constraints in real time, the tool renders an immediate, mathematically sound verdict on eligibility.</p>
-        <hr className="my-8 border-slate-200 dark:border-slate-800" />
-        <h3>Related Reading</h3>
-        <p>Learn more about dates and celestial mechanics in our detailed breakdown: <Link to="/blog/understanding-bikram-sambat" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-semibold transition-colors duration-200">Understanding the Bikram Sambat (BS) Calendar</Link>.</p>
+      {/* SEO Content Section */}
+      <div className="mt-16 pt-16 border-t border-slate-200 dark:border-slate-800">
+        <div className="max-w-4xl mx-auto space-y-12">
+          <section className="space-y-4">
+            <h2 className="text-3xl font-bold">Official Lok Sewa Age Eligibility Rules</h2>
+            <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
+              Applying for the Public Service Commission (PSC) in Nepal requires strict adherence to age limits. Our <strong>Lok Sewa Age Checker</strong> helps you determine if you fall within the mandatory age brackets for non-technical and technical civil service positions.
+            </p>
+          </section>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="p-8 bg-blue-600 rounded-[3rem] text-white space-y-4 shadow-xl shadow-blue-500/20">
+              <h3 className="font-bold text-lg flex items-center gap-2">
+                <UserCheck className="w-5 h-5 text-blue-200" />
+                Category Specific Limits
+              </h3>
+              <p className="text-xs opacity-90 leading-relaxed font-medium">
+                Limits vary significantly based on your gender and category. For example, while the limit for male candidates in administrative roles is 35, it extends to 40 for female candidates and those with disabilities. Health services have the highest threshold at 45.
+              </p>
+            </div>
+            <div className="space-y-4">
+              <h3 className="font-bold text-xl text-slate-800 dark:text-slate-200">How to use this tool?</h3>
+              <ul className="text-sm text-slate-500 space-y-3 list-disc pl-4">
+                <li>Select your gender (this affects the maximum age).</li>
+                <li>Enter your Date of Birth as per your citizenship certificate.</li>
+                <li>Check "Disabled Category" if you are applying through a disability quota.</li>
+                <li>Check "Health Service" for nursing, doctors, or medical technician roles.</li>
+                <li>The tool instantly tells you if you are eligible based on the current date.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="p-10 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[3rem] space-y-6">
+            <h4 className="text-xl font-bold flex items-center gap-2">
+                <Info className="w-5 h-5 text-blue-600" />
+                Important Disclaimer
+            </h4>
+            <p className="text-sm text-slate-500 leading-relaxed">
+                Age eligibility for Lok Sewa is usually calculated based on the <strong>last date of advertisement application</strong> (without double fee). While this tool uses the current date to give you a quick check, please refer to the specific advertisement PDF from the PSC portal (psc.gov.np) for the final confirmation of terms.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

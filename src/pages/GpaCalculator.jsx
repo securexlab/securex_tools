@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { Plus, Trash2, GraduationCap, Award, BarChart3 } from "lucide-react";
 import { cn } from "../lib/utils";
 import BackButton from "../components/BackButton";
@@ -130,16 +129,51 @@ export default function GpaCalculator() {
         </div>
       </div>
 
-      {/* SEO Optimized Publisher Content */}
-      <div className="prose prose-slate dark:prose-invert max-w-4xl mx-auto mt-16 p-8 bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800">
-        <h2>Calculating Academic Performance and Grade Point Averages</h2>
-        <p>Understanding academic standing is critical for students navigating Nepal's modern educational grading structures, such as the SEE and NEB exams. The GPA Calculator provides a structured, dynamic interface to accurately compute the weighted average of letter grades across multiple subjects, translating qualitative academic performance into a standardized numerical metric.</p>
-        <h3>The Weighted Average Algorithm</h3>
-        <p>The core logic of this calculator relies on a weighted arithmetic mean. Each academic letter grade (from A+ to D) is mathematically mapped to a specific grade point value (ranging from 4.0 to 1.6). When a user inputs their grades and corresponding credit hours, the engine performs a parallel aggregation.</p>
-        <p>For every subject, it multiplies the assigned grade point by the credit hours to determine the total weight. It then divides the sum of all weighted points by the sum of all credit hours. This formula ensures that subjects with higher credit hours exert a proportionally larger impact on the final Resultant GPA. The application updates the DOM in real-time, executing these floating-point calculations instantly to provide students with precise, error-free academic forecasting.</p>
-        <hr className="my-8 border-slate-200 dark:border-slate-800" />
-        <h3>Related Reading</h3>
-        <p>Learn more about regional measurement rules and mathematics in our article: <Link to="/blog/nepal-land-measurement-systems-explained" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-semibold transition-colors duration-200">Understanding Nepal's Mathematical Systems</Link>.</p>
+      {/* SEO Content Section */}
+      <div className="mt-16 pt-16 border-t border-slate-200 dark:border-slate-800">
+        <div className="max-w-4xl mx-auto space-y-12">
+          <section className="space-y-4">
+            <h2 className="text-3xl font-bold">Standardized GPA Calculator for SEE & NEB</h2>
+            <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
+              Our <strong>GPA Calculator</strong> is specifically designed for students in Nepal following the NEB (National Examination Board) and SEE (Secondary Education Examination) systems. It allows you to calculate your cumulative Grade Point Average by entering your grades and weightings (credit hours).
+            </p>
+          </section>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="font-bold text-xl text-blue-600">How to use this tool?</h3>
+              <ol className="text-sm text-slate-500 space-y-3 list-decimal pl-4">
+                <li>Enter the name of your subject (e.g., Science, Math).</li>
+                <li>Select the grade you received (A+, A, B+, etc.).</li>
+                <li>Enter the Credit Hours for that subject as per your mark sheet.</li>
+                <li>Add more subjects using the "Add Subject" button.</li>
+                <li>Your total GPA is updated in real-time as you make changes.</li>
+              </ol>
+            </div>
+            <div className="p-8 bg-blue-600 rounded-[3rem] text-white space-y-4 shadow-xl shadow-blue-500/20">
+              <h4 className="font-bold text-lg flex items-center gap-2">
+                < Award className="w-5 h-5 text-blue-200" />
+                NEB Grade Mapping
+              </h4>
+              <p className="text-xs opacity-90 leading-relaxed">
+                We use the standard NEB grade to point conversion:
+                <br /><br />
+                A+ (Outstanding): 4.0<br />
+                A (Excellent): 3.6<br />
+                B+ (Very Good): 3.2<br />
+                B (Good): 2.8<br />
+                C+ (Satisfactory): 2.4<br />
+                C (Acceptable): 2.0
+              </p>
+            </div>
+          </div>
+
+          <div className="p-6 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl">
+             <p className="text-center text-xs text-slate-500 italic">
+               Note: This tool provides an estimate based on the standard grade point mappings. For official results, always refer to the mark sheet issued by the examination board.
+             </p>
+          </div>
+        </div>
       </div>
     </div>
   );

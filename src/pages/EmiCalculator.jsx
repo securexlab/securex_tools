@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Landmark, Briefcase, Zap, PieChart } from "lucide-react";
 import { cn } from "../lib/utils";
 import BackButton from "../components/BackButton";
@@ -129,16 +128,47 @@ export default function EmiCalculator() {
         )}
       </div>
 
-      {/* SEO Optimized Publisher Content */}
-      <div className="prose prose-slate dark:prose-invert max-w-4xl mx-auto mt-16 p-8 bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800">
-        <h2>Demystifying Financial Mathematics and Loan Repayment</h2>
-        <p>Financial planning requires accurate forecasting of debt obligations. The EMI and Sikada Calculator is a dual-engine financial utility designed to handle both standard banking amortization and traditional Nepalese village lending rates. It provides users with an instant, clear breakdown of their monthly financial commitments, total repayment amounts, and absolute interest costs.</p>
-        <h3>Standard Bank EMI vs. Traditional Sikada Logic</h3>
-        <p>For institutional loans, the tool implements the universal Equated Monthly Installment (EMI) mathematical formula: <code>E = P x r x (1 + r)^n / ((1 + r)^n - 1)</code>, where 'P' is the principal, 'r' is the monthly interest rate, and 'n' is the total number of months. This algorithm correctly calculates compounded interest distributed evenly across the loan tenure.</p>
-        <p>Conversely, the "Sikada" system relies on localized flat-rate mechanics, calculating interest as a fixed monthly percentage per hundred rupees (e.g., 2% or 3% flat per month). The engine applies direct scalar multiplication <code>(Principal * Rate * Time) / 100</code> to determine the exact Sikada interest. By segregating these two distinct logical paths, the application gives users the power to evaluate structured institutional credit alongside traditional local lending practices.</p>
-        <hr className="my-8 border-slate-200 dark:border-slate-800" />
-        <h3>Related Reading</h3>
-        <p>Understand more regarding traditional calculations in our guide: <Link to="/blog/nepal-land-measurement-systems-explained" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-semibold transition-colors duration-200">Nepal Land and Mathematics Systems Explained</Link>.</p>
+      {/* SEO Content Section */}
+      <div className="mt-16 pt-16 border-t border-slate-200 dark:border-slate-800">
+        <div className="max-w-4xl mx-auto space-y-12">
+          <header className="text-center space-y-4">
+            <h2 className="text-3xl font-bold">Smart EMI Calculator for Homes & Cars</h2>
+            <p className="text-slate-600 dark:text-slate-400 text-lg">
+              Plan your finances better with our detailed <strong>Loan EMI Calculator</strong>. Whether it's a home loan, car loan, or personal loan, see your monthly commitments and total interest costs instantly.
+            </p>
+          </header>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { title: "Principal", desc: "The total money you borrow from the bank or lender." },
+              { title: "Interest Rate", desc: "The annual percentage rate charged by the bank." },
+              { title: "Loan Tenure", desc: "The duration (in years) to repay the full loan amount." },
+              { title: "Sikada Rate", desc: "Local interest mapping (usually Rs. 2 or 3 per hundred)." }
+            ].map((item, idx) => (
+              <div key={idx} className="p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm">
+                <h4 className="font-bold text-sm text-blue-600 mb-1">{item.title}</h4>
+                <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <section className="space-y-6">
+            <div className="bg-blue-50 dark:bg-blue-900/10 p-8 rounded-[2.5rem] border border-blue-100 dark:border-blue-800">
+              <h3 className="text-xl font-bold mb-4 text-blue-900 dark:text-blue-100">Understanding "Sikada" Interest</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
+                In many local communities in Nepal, the <strong>"Sikada"</strong> system is used where interest is calculated monthly per hundred rupees. A "2% rate" means Rs. 2 interest for every Rs. 100 borrowed per month. This tool helps you convert this traditional math into clear figures.
+              </p>
+              <div className="flex items-center gap-2 text-blue-600 font-bold text-xs uppercase tracking-widest">
+                <PieChart className="w-4 h-4" />
+                Know Your Finances
+              </div>
+            </div>
+          </section>
+
+          <p className="text-xs text-slate-400 text-center italic">
+            Note: This calculator provides estimates for informational purposes only. Local rates and bank fees may vary based on individual contracts.
+          </p>
+        </div>
       </div>
     </div>
   );

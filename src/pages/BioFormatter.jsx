@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { Instagram, Twitter, Facebook, Copy, Check, Hash } from "lucide-react";
 import { cn } from "../lib/utils";
 import BackButton from "../components/BackButton";
@@ -89,16 +88,47 @@ export default function BioFormatter() {
         </div>
       </div>
 
-      {/* SEO Optimized Publisher Content */}
-      <div className="prose prose-slate dark:prose-invert max-w-4xl mx-auto mt-16 p-8 bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800">
-        <h2>Optimizing Social Media Bios and Character Counting</h2>
-        <p>Crafting the perfect bio for platforms like Instagram, Twitter (X), Threads, and Facebook requires precision. Each platform imposes strict character limits on user profiles. The Bio Formatter is a specialized text utility that parses your input in real time, calculating exact string lengths against predefined platform constraints. By actively monitoring the character count, users can ensure their introductions remain within the allowed boundaries without truncation.</p>
-        <h3>The Logic Behind Character Calculation</h3>
-        <p>At a technical level, this tool relies on standard JavaScript string length properties, evaluating the UTF-16 code units of your text. It instantly binds to the textarea's change events, providing a millisecond-accurate reflection of remaining characters. As the user types, the application subtracts the current input length from the platform's maximum allowance (e.g., 150 for Instagram, 160 for Twitter). When the limit is breached, the UI conditionally applies error classes to visually alert the user.</p>
-        <p>This immediate feedback loop is critical for content creators who need to condense complex information into concise, readable formats. Formatting text perfectly ensures cross-platform consistency and better audience engagement while avoiding awkward cut-offs on mobile displays.</p>
-        <hr className="my-8 border-slate-200 dark:border-slate-800" />
-        <h3>Related Reading</h3>
-        <p>Want to dive deeper into text processing and character encoding standards? Check out our guide: <Link to="/blog/evolution-of-nepali-typography-preeti-to-unicode" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-semibold transition-colors duration-200">The Evolution of Nepali Typography</Link>.</p>
+      {/* SEO Content Section */}
+      <div className="mt-16 pt-16 border-t border-slate-200 dark:border-slate-800">
+        <div className="max-w-3xl mx-auto space-y-10">
+          <section className="space-y-4">
+            <h2 className="text-2xl font-bold">Elevate Your Presence with Professional Bio Formatting</h2>
+            <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-lg italic">
+              "Your bio is your first impression in the digital world. Make it count."
+            </p>
+            <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+              Our <strong>Social Media Bio Formatter</strong> helps you stand out on Instagram, Threads, and Twitter. Standard text can look cluttered; our tool allows you to accurately track character counts across different platforms to ensure your message is never cut short.
+            </p>
+          </section>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="font-bold text-slate-800 dark:text-slate-200">Perfect for Creators</h3>
+              <ul className="text-sm text-slate-500 space-y-2 list-disc pl-4">
+                <li>Optimize Instagram profile readability.</li>
+                <li>Add flair to your Threads introductions.</li>
+                <li>Create unique captions for TikTok.</li>
+                <li>Professional formatting for LinkedIn summaries.</li>
+              </ul>
+            </div>
+            <div className="bg-blue-600 p-6 rounded-[2rem] text-white space-y-3 shadow-xl shadow-blue-500/20">
+                <h4 className="font-bold">Character Limit Awareness</h4>
+                <p className="text-xs text-blue-100 opacity-90 leading-relaxed">
+                  Social platforms have strict limits (e.g., 150 for Instagram). Our tool tracks your length in real-time, providing immediate visual feedback if you exceed the allowed limit for any platform.
+                </p>
+            </div>
+          </div>
+
+          <div className="text-center p-8 bg-slate-50 dark:bg-slate-900 border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-3xl">
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-4">Supported Platforms</p>
+            <div className="flex flex-wrap justify-center gap-6 opacity-60">
+                <Instagram className="w-5 h-5" />
+                <Twitter className="w-5 h-5" />
+                <Facebook className="w-5 h-5" />
+                <Hash className="w-5 h-5" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 import { Trash2, Type, Clock, Hash, AlignLeft, FileText, Upload, Loader2 } from "lucide-react";
 import BackButton from "../components/BackButton";
 import mammoth from "mammoth";
@@ -138,16 +137,50 @@ export default function WordCounter() {
         </div>
       </div>
 
-      {/* SEO Optimized Publisher Content */}
-      <div className="prose prose-slate dark:prose-invert max-w-4xl mx-auto mt-16 p-8 bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800">
-        <h2>Real-Time Text Analytics and Reading Time Estimation</h2>
-        <p>For writers, journalists, and SEO professionals, analyzing text metrics is crucial for optimizing content length and pacing. The Word Counter is a client-side text processing engine that instantly computes character densities, word counts, sentence boundaries, and average reading times. It handles both direct text input and direct extraction from uploaded DOCX and PDF files.</p>
-        <h3>Regular Expressions and Metric Algorithms</h3>
-        <p>The application relies on a suite of optimized Regular Expressions (RegEx) to parse the active string state. Words are calculated by matching consecutive non-whitespace characters (<code>/\s+/</code>), while sentence counts are derived by splitting the string at standard terminal punctuation marks like periods, exclamation points, and the Devanagari Danda (<code>/[.!?।]/</code>). Characters excluding spaces are found by stripping whitespaces globally (<code>/\s/g</code>).</p>
-        <p>For file uploads, the tool utilizes embedded Web Workers via <code>pdfjs-dist</code> to asynchronously extract text vectors from PDF binaries, and <code>mammoth.js</code> to parse raw text streams from DOCX XML trees. Finally, it applies a standardized algorithm—dividing the total word count by an average human reading speed of 200 words per minute—to dynamically render accurate reading time estimations.</p>
-        <hr className="my-8 border-slate-200 dark:border-slate-800" />
-        <h3>Related Reading</h3>
-        <p>Dive deep into text formatting and character encoding history: <Link to="/blog/evolution-of-nepali-typography-preeti-to-unicode" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-semibold transition-colors duration-200">The Evolution of Nepali Typography</Link>.</p>
+      {/* SEO Content Section */}
+      <div className="mt-16 pt-16 border-t border-slate-200 dark:border-slate-800">
+        <div className="max-w-3xl mx-auto space-y-10">
+          <section className="space-y-4">
+            <h2 className="text-2xl font-bold">Free Online Word Counter & Reading Time Calculator</h2>
+            <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+              Whether you are a student writing an essay, a blogger crafting a new post, or a professional preparing a report, our <strong>Word Counter</strong> provides the precise metrics you need. It goes beyond simple counting by offering deep insights into your writing structure and readability.
+            </p>
+          </section>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm">
+              <div className="h-10 w-10 bg-blue-50 dark:bg-blue-900/20 text-blue-600 rounded-xl flex items-center justify-center mb-4">
+                <FileText className="w-5 h-5" />
+              </div>
+              <h4 className="font-bold mb-2">Docx & PDF Support</h4>
+              <p className="text-sm text-slate-500">Upload your Word documents or PDF files directly to extract text and count words without opening another app.</p>
+            </div>
+            <div className="p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm">
+              <div className="h-10 w-10 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 rounded-xl flex items-center justify-center mb-4">
+                <Clock className="w-5 h-5" />
+              </div>
+              <h4 className="font-bold mb-2">Reading Time</h4>
+              <p className="text-sm text-slate-500">Estimated based on an average speed of 200 Words Per Minute (WPM), helping you optimize content length for your audience.</p>
+            </div>
+            <div className="p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm">
+              <div className="h-10 w-10 bg-amber-50 dark:bg-amber-900/20 text-amber-600 rounded-xl flex items-center justify-center mb-4">
+                <AlignLeft className="w-5 h-5" />
+              </div>
+              <h4 className="font-bold mb-2">Detailed Metrics</h4>
+              <p className="text-sm text-slate-500">Track character counts with and without spaces, and see exactly how many sentences make up your document.</p>
+            </div>
+          </div>
+
+          <section className="space-y-4">
+            <h3 className="text-xl font-bold">Why use SecureX Lab Word Counter?</h3>
+            <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">
+              Most online counters only look at English text. Our tool is optimized for both <strong>English</strong> and <strong>Nepali</strong> (Devanagari) characters. It correctly identifies Nepali sentence endings (Purna Biram ।) to provide accurate sentence counts for local content creators.
+            </p>
+            <div className="p-6 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-800 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">
+              No Data Stored • Privacy Focused • 100% Client-Side Processing
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   );
