@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import { Copy, Check, Info, Keyboard, Trash2, ArrowRightLeft, HelpCircle } from "lucide-react";
 import { cn } from "../lib/utils";
 import BackButton from "../components/BackButton";
@@ -236,65 +237,16 @@ export default function RomanToNepali() {
         </div>
       </div>
 
-      {/* SEO Content Section */}
-      <div className="mt-16 pt-16 border-t border-slate-200 dark:border-slate-800">
-        <div className="max-w-3xl mx-auto space-y-12">
-            <section className="space-y-6">
-                <h2 className="text-2xl font-bold">What is Nepali Romanized Unicode?</h2>
-                <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-lg">
-                    The <strong>Romanized Unicode</strong> layout is the standard for professional Nepali typing. Unlike "Traditional Unicode" (based on Typewriter layouts), Romanized mapping follows the English QWERTY keyboard's phonetic sounds. For example, pressing <strong>'k'</strong> types <strong>'क'</strong>, and <strong>'p'</strong> types <strong>'प'</strong>.
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div className="flex gap-4 items-start">
-                        <div className="h-10 w-10 rounded-full bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 flex items-center justify-center shrink-0">
-                            <Check className="w-5 h-5" />
-                        </div>
-                        <div>
-                            <h4 className="font-bold mb-1">Government Approved</h4>
-                            <p className="text-sm text-slate-500">Standard layout for Lok Sewa (PSC) and civil service typing tests in Nepal.</p>
-                        </div>
-                    </div>
-                    <div className="flex gap-4 items-start">
-                        <div className="h-10 w-10 rounded-full bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 flex items-center justify-center shrink-0">
-                            <Check className="w-5 h-5" />
-                        </div>
-                        <div>
-                            <h4 className="font-bold mb-1">Search Engine Friendly</h4>
-                            <p className="text-sm text-slate-500">Text typed here is fully searchable by Google, ensuring your content reaches the right audience.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section className="p-10 bg-slate-100 dark:bg-slate-800/50 rounded-[40px] border border-slate-200 dark:border-slate-700/50 space-y-6">
-                <h3 className="text-xl font-bold flex items-center gap-2">
-                    <Info className="w-5 h-5 text-blue-600" />
-                    How to type Half-Chars & Conjuncts?
-                </h3>
-                <div className="space-y-4 text-slate-600 dark:text-slate-400 leading-relaxed">
-                    <p>To type a half-character in Nepali Unicode, simply press the <strong>Slash (/)</strong> key after a character. The slash acts as a "Halant" (्), which kills the inherent 'a' sound.</p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
-                             <code className="text-blue-600 font-bold">k + / + s = क्</code>
-                        </div>
-                        <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
-                             <code className="text-blue-600 font-bold">n + / + n = न्न</code>
-                        </div>
-                    </div>
-                    <p className="text-sm italic">This tool ensures your Nepali typing is grammatically correct and compatible with all modern software.</p>
-                </div>
-            </section>
-
-            <div className="text-center space-y-4">
-                <h3 className="font-bold text-slate-800 dark:text-slate-200 uppercase tracking-widest text-xs">Trusted By Professionals</h3>
-                <div className="flex flex-wrap justify-center gap-8 opacity-40 grayscale group-hover:grayscale-0 transition-all">
-                    <span className="font-bold italic">LokSewa Prep</span>
-                    <span className="font-bold italic">Nepali Media</span>
-                    <span className="font-bold italic">Civil Society</span>
-                    <span className="font-bold italic">Educators</span>
-                </div>
-            </div>
-        </div>
+      {/* SEO Optimized Publisher Content */}
+      <div className="prose prose-slate dark:prose-invert max-w-4xl mx-auto mt-16 p-8 bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800">
+        <h2>Mastering Romanized Nepali Unicode Typing</h2>
+        <p>Typing in Devanagari often presents a steep learning curve for users accustomed to standard QWERTY keyboards. The Roman to Nepali Unicode Converter bridges this gap by implementing the official Romanized Unicode layout. This enables users to generate precise Nepali text by typing phonetically intuitive English keystrokes, making it the standard for government documentation and professional publishing.</p>
+        <h3>Keymap Interception and String Manipulation</h3>
+        <p>The technical foundation of this tool lies in its event-driven architecture and fixed-dictionary mapping. The application mounts a persistent <code>onKeyDown</code> listener directly onto the textarea. When a user strikes a key, the listener intercepts the event, preventing the default English character from rendering.</p>
+        <p>It then queries a comprehensive, hardcoded JSON dictionary that correlates the specific ASCII keystroke (and its <code>Shift</code> modifier state) to its exact Devanagari hexadecimal Unicode counterpart. The engine executes a highly optimized string slice operation, inserting the mapped Unicode character precisely at the cursor's current index within the string. Furthermore, it supports clipboard paste events, automatically parsing and mapping entire blocks of text instantly. This client-side, zero-latency execution guarantees a seamless and secure typing experience.</p>
+        <hr className="my-8 border-slate-200 dark:border-slate-800" />
+        <h3>Related Reading</h3>
+        <p>Read about the history behind this typing layout in our full breakdown: <Link to="/blog/evolution-of-nepali-typography-preeti-to-unicode" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-semibold transition-colors duration-200">The Evolution of Nepali Typography</Link>.</p>
       </div>
     </div>
   );

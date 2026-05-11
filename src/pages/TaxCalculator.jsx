@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Calculator, Wallet, TrendingUp, Info } from "lucide-react";
 import BackButton from "../components/BackButton";
 
@@ -191,98 +192,16 @@ export default function TaxCalculator() {
         </div>
       </div>
 
-      {/* SEO Content Section */}
-      <div className="mt-16 pt-16 border-t border-slate-200 dark:border-slate-800">
-        <div className="max-w-4xl mx-auto space-y-12">
-          <section className="space-y-4">
-            <h2 className="text-3xl font-bold">Smart Salary Tax Calculator for Nepal (FY 2080/81)</h2>
-            <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed text-center">
-              Our <strong>Nepali Tax Calculator</strong> is updated with the latest Finance Act 2080 changes. It helps salaried individuals and couples calculate their monthly TDS (Tax Deducted at Source) and see their actual take-home salary after all government obligations.
-            </p>
-          </section>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-8 bg-blue-600 rounded-[3rem] text-white space-y-4 shadow-xl shadow-blue-500/20">
-              <h3 className="font-bold text-lg flex items-center gap-2">
-                <Calculator className="w-5 h-5 text-blue-200" />
-                The 1% Social Security Tax
-              </h3>
-              <p className="text-xs opacity-90 leading-relaxed font-medium">
-                In Nepal, the first bracket of taxable income is taxed at 1% for Social Security. For individuals, this applies to the first 5 Lakhs, and for couples, it's the first 6 Lakhs. Our tool automatically detects your marital status and applies the correct threshold.
-              </p>
-            </div>
-            <div className="space-y-4">
-              <h3 className="font-bold text-xl text-slate-800 dark:text-slate-200">How is my tax calculated?</h3>
-              <ul className="text-sm text-slate-500 space-y-3 list-disc pl-4">
-                <li>Input your gross monthly salary (before any deductions).</li>
-                <li>Choose "Individual" or "Couple" status.</li>
-                <li>We apply the tiered slab system (10%, 20%, 30%, etc.).</li>
-                <li>The tool shows both your monthly deduction and annual projection.</li>
-                <li>See exactly how much you take home every month after tax.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="p-10 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[3rem] space-y-8">
-            <div className="space-y-4">
-              <h4 className="text-xl font-black text-slate-900 dark:text-white">Tax Slabs & Rates (FY 2080/81)</h4>
-              <p className="text-sm text-slate-500 leading-relaxed">
-                The following tables outline the annual tax brackets for resident individuals and couples in Nepal. Tax is calculated cumulatively across these tiers.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="space-y-4">
-                <h5 className="text-xs font-black uppercase tracking-widest text-blue-600">Individual (Single)</h5>
-                <div className="overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800">
-                  <table className="w-full text-left text-xs">
-                    <thead className="bg-slate-100 dark:bg-slate-800 text-slate-400 font-bold">
-                      <tr>
-                        <th className="px-4 py-3 uppercase tracking-tighter">Annual Slab (NPR)</th>
-                        <th className="px-4 py-3 uppercase tracking-tighter">Rate</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-600 dark:text-slate-400 font-medium">
-                      <tr><td className="px-4 py-3">Up to 5,00,000</td><td className="px-4 py-3 font-bold text-slate-900 dark:text-white">1%</td></tr>
-                      <tr><td className="px-4 py-3">Next 2,00,000 (To 7L)</td><td className="px-4 py-3 font-bold text-slate-900 dark:text-white">10%</td></tr>
-                      <tr><td className="px-4 py-3">Next 3,00,000 (To 10L)</td><td className="px-4 py-3 font-bold text-slate-900 dark:text-white">20%</td></tr>
-                      <tr><td className="px-4 py-3">Next 10,00,000 (To 20L)</td><td className="px-4 py-3 font-bold text-slate-900 dark:text-white">30%</td></tr>
-                      <tr><td className="px-4 py-3">Above 20,00,000</td><td className="px-4 py-3 font-bold text-slate-900 dark:text-white">36%</td></tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <h5 className="text-xs font-black uppercase tracking-widest text-emerald-600">Couple (Married)</h5>
-                <div className="overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800">
-                  <table className="w-full text-left text-xs">
-                    <thead className="bg-slate-100 dark:bg-slate-800 text-slate-400 font-bold">
-                      <tr>
-                        <th className="px-4 py-3 uppercase tracking-tighter">Annual Slab (NPR)</th>
-                        <th className="px-4 py-3 uppercase tracking-tighter">Rate</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-600 dark:text-slate-400 font-medium">
-                      <tr><td className="px-4 py-3">Up to 6,00,000</td><td className="px-4 py-3 font-bold text-slate-900 dark:text-white">1%</td></tr>
-                      <tr><td className="px-4 py-3">Next 2,00,000 (To 8L)</td><td className="px-4 py-3 font-bold text-slate-900 dark:text-white">10%</td></tr>
-                      <tr><td className="px-4 py-3">Next 3,00,000 (To 11L)</td><td className="px-4 py-3 font-bold text-slate-900 dark:text-white">20%</td></tr>
-                      <tr><td className="px-4 py-3">Next 9,00,000 (To 20L)</td><td className="px-4 py-3 font-bold text-slate-900 dark:text-white">30%</td></tr>
-                      <tr><td className="px-4 py-3">Above 20,00,000</td><td className="px-4 py-3 font-bold text-slate-900 dark:text-white">36%</td></tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-4">
-              <h4 className="text-xl font-bold">Wait, I have Life Insurance!</h4>
-              <p className="text-sm text-slate-500 leading-relaxed">
-                  While this calculator provides a robust baseline and accounts for the latest slabs, it does not currently factor in <strong>Section 12L (Life Insurance Premium)</strong> or <strong>SSF (Social Security Fund)</strong> deductions which can provide additional tax benefits. For high-precision tax planning, we recommend consulting with a certified accountant or using the Inland Revenue Department (IRD) official portal.
-              </p>
-            </div>
-          </div>
-        </div>
+      {/* SEO Optimized Publisher Content */}
+      <div className="prose prose-slate dark:prose-invert max-w-4xl mx-auto mt-16 p-8 bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800">
+        <h2>Computing Nepal's Progressive Income Tax Slabs</h2>
+        <p>Understanding net take-home pay requires navigating complex governmental tax codes. The Tax Calculator is a financial modeling utility that executes the precise income tax regulations mandated by the Inland Revenue Department of Nepal. It abstracts the complexities of the annual budget, providing salaried individuals with an exact breakdown of their TDS (Tax Deducted at Source) and net income.</p>
+        <h3>The Mathematics of Progressive Taxation</h3>
+        <p>The engine's logic is built upon a cascading, bracketed algorithm. Nepal's tax structure applies progressive percentage multipliers (1%, 10%, 20%, 30%, and 36%) to specific brackets of annual income. The tool first annualizes the user's monthly input and checks the selected marital status to determine the baseline exemption threshold (e.g., 500,000 for singles vs. 600,000 for married couples).</p>
+        <p>It then iterates through the taxable amount. If the income exceeds a bracket, it multiplies that specific chunk by the tier's rate, subtracts it from the remaining pool, and pushes the remainder into the next tier calculation. By accurately summing these fractional tax liabilities and dividing by 12, the application guarantees an accurate monthly TDS deduction, yielding the exact net monthly balance without requiring manual spreadsheet formulas.</p>
+        <hr className="my-8 border-slate-200 dark:border-slate-800" />
+        <h3>Related Reading</h3>
+        <p>Explore traditional measurement metrics and related mathematics in Nepal: <Link to="/blog/nepal-land-measurement-systems-explained" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-semibold transition-colors duration-200">Nepal Land Measurement Systems Explained</Link>.</p>
       </div>
     </div>
   );

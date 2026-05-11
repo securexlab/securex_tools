@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import { Upload, X, FileText, Loader2, AlertCircle, CheckCircle2, Download } from "lucide-react";
 import BackButton from "../components/BackButton";
 import { cn } from "../lib/utils";
@@ -314,6 +315,27 @@ export default function FileMerger() {
             </li>
           </ul>
         </div>
+      </div>
+
+      {/* SEO Optimized Publisher Content */}
+      <div className="prose prose-slate dark:prose-invert max-w-4xl mx-auto mt-16 p-8 bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800">
+        <h2>How the Universal Document Merger Works</h2>
+        <p>
+          Combining multiple documents into a single, cohesive PDF is an essential task for professionals managing reports, invoices, or academic papers. The Universal Document Merger streamlines this process by accepting various file formats—including Word documents (.docx, .doc), PowerPoint presentations (.pptx, .ppt), and standard PDFs—and seamlessly unifying them into one continuous PDF file.
+        </p>
+        <h3>The Document Conversion Logic</h3>
+        <p>
+          Under the hood, this tool utilizes advanced multipart file parsing to handle bulk uploads securely. When you upload non-PDF formats, the system initiates an auto-detect conversion protocol. It reads the binary buffer of each file and programmatically converts it into a standardized PDF format in real-time. This algorithmic standardization ensures that fonts, layouts, and image placements are preserved exactly as they appeared in the original source files.
+        </p>
+        <h3>Secure PDF Concatenation</h3>
+        <p>
+          Once all files are standardized into PDF buffers, the application sequences them based on your selected order. The merging algorithm concatenates the document streams dynamically. To prioritize your privacy, the merged binary buffer is streamed directly back to your browser as a downloadable <code>application/pdf</code> blob without permanently storing your sensitive data on our servers. This architecture ensures high performance—processing payloads of up to 50 MB per file—while maintaining strict security standards.
+        </p>
+        <hr className="my-8 border-slate-200 dark:border-slate-800" />
+        <h3>Related Reading</h3>
+        <p>
+          Want to learn more about the privacy and security implications of online file processing? Check out our detailed guide: <Link to="/blog/why-secure-file-conversion-matters" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-semibold transition-colors duration-200">Why Secure File Conversion Matters</Link>.
+        </p>
       </div>
     </div>
   );

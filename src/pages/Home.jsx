@@ -50,7 +50,7 @@ export default function Home() {
                 >
                   <div className="relative z-10">
                     <div className={`h-8 w-8 bg-${cat.color}-50 dark:bg-${cat.color}-900/20 text-${cat.color}-600 dark:text-${cat.color}-400 rounded-lg flex items-center justify-center mb-3 transition-all group-hover:bg-blue-600 group-hover:text-white group-hover:scale-110 shadow-sm`}>
-                      <cat.icon className="w-4 h-4" />
+              {item.icon ? <item.icon className="w-4 h-4" /> : (cat.icon && <cat.icon className="w-4 h-4" />)}
                     </div>
                     <h5 className="font-bold text-[13px] text-slate-800 dark:text-slate-100 mb-1 group-hover:text-blue-600 transition-colors line-clamp-1 border-0">
                       {item.name}

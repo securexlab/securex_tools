@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { Upload, Download, Image as ImageIcon, Check, Info, FileText } from "lucide-react";
 import { cn } from "../lib/utils";
 import BackButton from "../components/BackButton";
+import ToolSeoSection from "../components/ToolSeoSection";
 
 const presets = [
   { name: "Lok Sewa Photo", width: 350, height: 450, label: "350x450 px", maxSize: 200, icon: ImageIcon },
@@ -145,48 +146,13 @@ export default function PhotoResizer() {
       
       <canvas ref={canvasRef} className="hidden" />
 
-      {/* SEO Content Section */}
-      <div className="mt-16 pt-16 border-t border-slate-200 dark:border-slate-800">
-        <div className="max-w-4xl mx-auto space-y-12">
-          <section className="space-y-4">
-            <h2 className="text-3xl font-bold">Resize and Compress for Official Forms</h2>
-            <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed text-center">
-              Our <strong>Photo Resizer</strong> is specially calibrated for Nepali government portals. Whether you are applying for <strong>Lok Sewa Aayog (PSC)</strong>, TSC, or citizenship, we ensure your photos meet the exact pixel and file size requirements without any technical jargon.
-            </p>
-          </section>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-8 bg-blue-600 rounded-[3rem] text-white space-y-4 shadow-xl shadow-blue-500/20">
-              <h3 className="font-bold text-lg flex items-center gap-2">
-                <ImageIcon className="w-5 h-5 text-blue-200" />
-                Precise Dimensions
-              </h3>
-              <p className="text-xs opacity-90 leading-relaxed font-medium">
-                Standard photo for Lok Sewa requires 350x450 pixels, while a signature should be 300x150 pixels. Our presets automatically apply these constraints so you don't have to manual crop or guess the aspect ratio.
-              </p>
-            </div>
-            <div className="space-y-4">
-              <h3 className="font-bold text-xl text-slate-800 dark:text-slate-200">How to use?</h3>
-              <ul className="text-sm text-slate-500 space-y-3 list-disc pl-4">
-                <li>Upload your original high-quality photo or signature scan.</li>
-                <li>Choose your target preset (e.g., Lok Sewa Photo).</li>
-                <li>Click "Process Photo" to apply the standard resizing.</li>
-                <li>Download the optimized JPG file ready for the portal.</li>
-                <li>Your original data never leaves your browser (Safe & Secure).</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="p-10 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[3rem] space-y-6">
-            <h4 className="text-xl font-bold flex items-center gap-2">
-                <Info className="w-5 h-5 text-blue-600" />
-                Why use this tool instead of Paint?
-            </h4>
-            <p className="text-sm text-slate-500 leading-relaxed">
-                Generic photo editors often distort images or keep the file size too high. Our engine uses an intelligent <strong>canvas-based compression</strong> algorithm that reduces file weight (below 200KB or 500KB as required) while keeping your facial features or signature clear and legible for official verification.
-            </p>
-          </div>
-        </div>
+      <ToolSeoSection tool="p-ho-to-re-si-ze-r" />
+      
+      <div className="max-w-4xl mx-auto p-6 bg-blue-50 dark:bg-blue-900/10 rounded-2xl mt-8">
+        <h3 className="font-bold text-blue-900 dark:text-blue-300 mb-2">Related Reading</h3>
+        <p className="text-sm text-blue-800 dark:text-blue-200">
+          Find out more about document requirements in our post on <a href="/blog/preparing-digital-documents-nepal" className="underline font-bold hover:text-blue-600">Preparing Digital Documents for Government Portals in Nepal</a>.
+        </p>
       </div>
     </div>
   );

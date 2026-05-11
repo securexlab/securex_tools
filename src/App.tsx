@@ -4,6 +4,7 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import { ThemeProvider } from "./context/ThemeContext";
 
+
 // Category 1 Tools
 import PreetiToUnicode from "./pages/PreetiToUnicode";
 import RomanToNepali from "./pages/RomanToNepali";
@@ -45,6 +46,10 @@ import FileMerger from "./pages/file-merger";
 // Legal Pages
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
+
+// Blog Pages
+import BlogIndex from "./pages/blog/BlogIndex";
+import BlogPost from "./pages/blog/BlogPost";
 
 // Landing Page & Navigation Components
 export default function App() {
@@ -95,6 +100,10 @@ export default function App() {
           {/* Legal Pages */}
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<TermsOfUse />} />
+
+          {/* Blog Pages */}
+          <Route path="/blog" element={<BlogIndex />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
   
           {/* Fallback */}
           <Route path="*" element={<Navigate to="/" replace />} />

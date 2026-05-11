@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Download, Printer, FileText, Send, User, MapPin, Globe, Server, CheckCircle2, Mail, AlertTriangle } from "lucide-react";
 import BackButton from "../components/BackButton";
 import { cn } from "../lib/utils";
@@ -260,43 +261,15 @@ export default function NpDomainLetter() {
       </div>
 
       {/* SEO Section */}
-      <div className="mt-16 pt-16 border-t border-slate-200 dark:border-slate-800">
-        <div className="max-w-3xl mx-auto space-y-8">
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold">What is a .NP Domain Cover Letter?</h2>
-            <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              In Nepal, registering a .com.np, .org.np, or other .np ccTLD requires a formal application letter addressed to Mercantile Communications. This letter acts as a formal request to the registry to allocate the domain to an individual or an organization.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="space-y-3">
-              <h3 className="font-bold text-slate-800 dark:text-slate-200">How to use this tool?</h3>
-              <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-2 list-disc pl-4">
-                <li>Select "Personal" for individual or "Organization" for business.</li>
-                <li>Enter the desired domain name (e.g., yourname.com.np).</li>
-                <li>Fill in your full name and address exactly as it appears on your ID.</li>
-                <li>Provide your hosting provider's name servers (DNS).</li>
-                <li>Click "Print" to save it as a PDF.</li>
-              </ul>
-            </div>
-            <div className="space-y-3">
-              <h3 className="font-bold text-slate-800 dark:text-slate-200">Key Registration Rules</h3>
-              <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-2 list-disc pl-4">
-                <li>Personal domains must match your citizenship name.</li>
-                <li>Organization domains must match business registration name.</li>
-                <li>Registration is completely free for Nepalese citizens.</li>
-                <li>A front and back scan of your citizenship is mandatory.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="p-6 bg-slate-100 dark:bg-slate-800/50 rounded-2xl">
-            <p className="text-sm text-slate-500 italic text-center">
-              Our generator ensures your cover letter follows the standard format accepted by Mercantile for faster approval. No more manual typing or formatting issues.
-            </p>
-          </div>
-        </div>
+      <div className="prose prose-slate dark:prose-invert max-w-4xl mx-auto mt-16 p-8 bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800">
+        <h2>Automating .com.np Domain Registration Letters</h2>
+        <p>Registering a free `.com.np` country-code top-level domain (ccTLD) in Nepal requires strict adherence to the bureaucratic procedures set by Mercantile Communications. The .NP Domain Cover Letter Generator is a utility designed to systematically assemble the mandatory, formally structured request letter required to approve both personal and organizational domain allocations.</p>
+        <h3>Template Interpolation and Formatting Logic</h3>
+        <p>To eliminate formatting errors that lead to application rejections, this tool relies on dynamic string interpolation. It binds stateful React variables to a pre-defined, official document schema. As the user inputs their Name, Exact Domain, DNS routing details, and Address, the application injects these string values into the exact DOM nodes required for the cover letter layout.</p>
+        <p>The tool implements active validation checks—such as regex-based email verification and `.np` suffix enforcement—preventing users from generating invalid requests. Finally, the component leverages browser-native print APIs, allowing the dynamically generated HTML template to be instantly exported as a perfectly scaled, professional PDF ready for submission to the registry portal.</p>
+        <hr className="my-8 border-slate-200 dark:border-slate-800" />
+        <h3>Related Reading</h3>
+        <p>Ensure you handle your official document files securely. Read our guide: <Link to="/blog/why-secure-file-conversion-matters" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-semibold transition-colors duration-200">Why Secure File Conversion Matters</Link>.</p>
       </div>
     </div>
   );

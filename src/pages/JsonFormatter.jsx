@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Copy, Check, FileJson, Trash2, Quote, AlertCircle, Sparkles } from "lucide-react";
 import { cn } from "../lib/utils";
 import BackButton from "../components/BackButton";
@@ -122,49 +123,16 @@ export default function JsonFormatter() {
         ))}
       </div>
 
-      {/* SEO Content Section */}
-      <div className="mt-16 pt-16 border-t border-slate-200 dark:border-slate-800">
-        <div className="max-w-4xl mx-auto space-y-12">
-          <section className="space-y-4">
-            <h2 className="text-3xl font-bold">The Ultimate JSON Formatter & Validator</h2>
-            <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
-              Working with raw JSON can be a headache, especially when it's minified or deeply nested. Our <strong>JSON Formatter</strong> helps you transform ugly, unreadable blobs of data into beautifully indented, structured code. It also doubles as a <strong>JSON Validator</strong>, catching syntax errors (missing commas, quotes, etc.) in real-time.
-            </p>
-          </section>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-8 bg-blue-600 rounded-[3rem] text-white space-y-4 shadow-xl shadow-blue-500/20">
-              <h3 className="font-bold text-lg flex items-center gap-2">
-                <FileJson className="w-5 h-5 text-blue-200" />
-                Prettify & Minify
-              </h3>
-              <p className="text-xs opacity-90 leading-relaxed font-medium">
-                Choose between "Prettify" to make JSON human-readable for debugging, or "Minify" to remove all white spaces and line breaks for saving storage and improving API performance.
-              </p>
-            </div>
-            <div className="space-y-4">
-              <h3 className="font-bold text-xl text-slate-800 dark:text-slate-200">Key Features</h3>
-              <ul className="text-sm text-slate-500 space-y-3 list-disc pl-4">
-                <li>Instantly catch JSON syntax errors with line-by-line feedback.</li>
-                <li>One-click copy to clipboard for quick implementation.</li>
-                <li>Secure 100% client-side processing (No data sent to server).</li>
-                <li>Dark mode support for comfortable late-night debugging.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="p-8 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2.5rem] flex items-start gap-4">
-            <div className="p-3 bg-amber-100 dark:bg-amber-900/30 text-amber-600 rounded-2xl">
-                <AlertCircle className="w-6 h-6" />
-            </div>
-            <div>
-                <h4 className="font-bold mb-2">How it works?</h4>
-                <p className="text-sm text-slate-500 leading-relaxed">
-                   Simply paste your raw JSON into the input box. Our engine uses the native <strong>JSON.parse()</strong> method to validate your data. If valid, <strong>JSON.stringify(data, null, 2)</strong> is used to create the beautifully formatted output you see on the right. If invalid, the exact error thrown by the JavaScript engine is displayed for you to fix.
-                </p>
-            </div>
-          </div>
-        </div>
+      {/* SEO Optimized Publisher Content */}
+      <div className="prose prose-slate dark:prose-invert max-w-4xl mx-auto mt-16 p-8 bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800">
+        <h2>Parsing and Standardizing JSON Data Structures</h2>
+        <p>JavaScript Object Notation (JSON) is the universal standard for data exchange across modern APIs and web applications. However, unformatted or minified JSON is nearly impossible for developers to read or debug. The JSON Formatter acts as a client-side parsing engine that validates, prettifies, and compresses JSON payloads instantly, ensuring data integrity without transmitting sensitive information to external servers.</p>
+        <h3>The Mechanics of Abstract Syntax Tree Parsing</h3>
+        <p>When a user inputs a raw string, the application utilizes the browser's native JavaScript engine to parse the text into an Abstract Syntax Tree (AST). If the syntax is malformed, the parser immediately catches the exception and surfaces a precise error, preventing application crashes.</p>
+        <p>For valid data, the tool runs a stringification process. When "Prettify" is invoked, the algorithm injects standardized indentation (typically two spaces) and line breaks, visually nesting the hierarchical data. When "Minify" is selected, the engine strips all non-essential whitespace, line breaks, and carriage returns, reducing the total byte size of the payload. This seamless manipulation of object properties ensures developers can easily inspect API responses or optimize data for network transmission.</p>
+        <hr className="my-8 border-slate-200 dark:border-slate-800" />
+        <h3>Related Reading</h3>
+        <p>Check out our deeper dive into typography and string processing: <Link to="/blog/evolution-of-nepali-typography-preeti-to-unicode" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-semibold transition-colors duration-200">The Evolution of Nepali Typography</Link>.</p>
       </div>
     </div>
   );

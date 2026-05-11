@@ -40,6 +40,9 @@ export default function Navbar({ onMenuClick }) {
       </div>
 
       <div className="flex items-center gap-4 lg:gap-8">
+        <Link to="/blog" className="text-sm font-bold uppercase tracking-widest text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-500 transition-colors">
+          Blog
+        </Link>
         <div 
           onClick={toggleTheme}
           className="h-8 w-14 bg-slate-100 dark:bg-slate-800 rounded-full p-1.5 flex items-center cursor-pointer relative transition-colors shadow-inner"

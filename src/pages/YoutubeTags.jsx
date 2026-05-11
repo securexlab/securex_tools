@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Youtube, Search, Copy, Check, Hash, Sparkles } from "lucide-react";
 import { cn } from "../lib/utils";
 import BackButton from "../components/BackButton";
@@ -108,47 +109,16 @@ export default function YoutubeTags() {
         </div>
       </div>
 
-      {/* SEO Content Section */}
-      <div className="mt-16 pt-16 border-t border-slate-200 dark:border-slate-800">
-        <div className="max-w-4xl mx-auto space-y-12">
-          <section className="space-y-4">
-            <h2 className="text-3xl font-bold">Grow Your Channel with Trending YouTube Tags</h2>
-            <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
-              Tagging is one of the most misunderstood parts of YouTube SEO. Our <strong>YouTube Tag Generator</strong> helps you discover and select the most relevant keywords specifically for the Nepalese audience. Using correct tags helps YouTube's algorithm understand your content and suggest it to the right viewers.
-            </p>
-          </section>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-8 bg-red-600 rounded-[3rem] text-white space-y-4 shadow-xl shadow-red-500/20">
-              <h3 className="font-bold text-lg flex items-center gap-2 text-white">
-                <Youtube className="w-5 h-5 text-red-200" />
-                Targeting the Niche
-              </h3>
-              <p className="text-xs opacity-90 leading-relaxed font-medium">
-                The Nepalese YouTube market is highly competitive in niches like Vlogging, Tech, and Music. Using tags like "Nepali YouTuber" or "Kathmandu Vlog" ensures that your video appears in the "Suggested" section for users who already consume similar content in Nepal.
-              </p>
-            </div>
-            <div className="space-y-4">
-              <h3 className="font-bold text-xl text-slate-800 dark:text-slate-200">Tagging Best Practices</h3>
-              <ul className="text-sm text-slate-500 space-y-3 list-disc pl-4">
-                <li><strong>Relevance:</strong> Only use tags that directly relate to your video content.</li>
-                <li><strong>Mix:</strong> Use a combination of broad (e.g., Nepal) and specific (e.g., Everest Base Camp Trek) tags.</li>
-                <li><strong>Limit:</strong> Don't exceed the 500-character limit provided by YouTube.</li>
-                <li><strong>Order:</strong> Put your most important keywords first in the list.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="p-10 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[3rem] space-y-6">
-            <h4 className="text-xl font-bold flex items-center gap-2">
-                <Hash className="w-5 h-5 text-red-600" />
-                How to use these tags?
-            </h4>
-            <p className="text-sm text-slate-500 leading-relaxed">
-                Browse through our curated groups (Vlog, News, Tech, etc.) and tap on the tags you want to use. They will appear in the "Selected Tags" box. Once you've selected your favorites, click the "Copy" button at the top. Go to your YouTube Studio video details page, find the "Tags" section, and paste them (Ctrl+V). Simple and effective!
-            </p>
-          </div>
-        </div>
+      {/* SEO Optimized Publisher Content */}
+      <div className="prose prose-slate dark:prose-invert max-w-4xl mx-auto mt-16 p-8 bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800">
+        <h2>Optimizing YouTube Tags for the Nepali Niche</h2>
+        <p>In the highly competitive landscape of digital video, algorithmic visibility dictates a channel's success. The YouTube Tags Tool provides content creators with curated, high-traffic keyword arrays specifically tailored for the Nepali audience. By organizing trending phrases across categories like Tech, Vlogs, and Gaming, it enables creators to construct robust metadata payloads that directly appeal to regional search queries.</p>
+        <h3>Keyword Indexing and Array Manipulation</h3>
+        <p>Under the hood, this utility leverages highly optimized array state management to handle keyword selection. The application initializes predefined multidimensional arrays containing localized search terms. When a user interacts with the UI, a toggle function evaluates the inclusion of the string within the active state array. If absent, it pushes the string; if present, it splices it out. This ensures an exact, non-duplicative list of tags.</p>
+        <p>Upon finalization, the tool utilizes the <code>Array.join(', ')</code> method to automatically format the selected tags into a comma-separated string, pushing it directly to the system clipboard via the <code>navigator.clipboard.writeText()</code> API. This frictionless data manipulation allows creators to rapidly inject SEO-optimized strings into their YouTube metadata.</p>
+        <hr className="my-8 border-slate-200 dark:border-slate-800" />
+        <h3>Related Reading</h3>
+        <p>Learn more about indexing formats and character systems in our article: <Link to="/blog/evolution-of-nepali-typography-preeti-to-unicode" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-semibold transition-colors duration-200">The Evolution of Nepali Typography</Link>.</p>
       </div>
     </div>
   );

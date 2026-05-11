@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import NepaliDate from "nepali-date-converter";
 import { User, Calendar, RefreshCw, Sparkles, History, Info } from "lucide-react";
 import BackButton from "../components/BackButton";
@@ -302,65 +303,17 @@ export default function AgeCalculator() {
         </div>
       </div>
 
-      {/* SEO & Informational Content */}
-      <div className="max-w-7xl mx-auto px-6 py-24 border-t border-slate-100 dark:border-slate-800">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-          <div className="lg:col-span-2 space-y-12">
-            <section className="space-y-6">
-              <h2 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">Unified Age Calculation Logic</h2>
-              <p className="text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
-                To ensure absolute consistency, our calculator unifies the age breakdown (Years, Months, Days) using the <strong className="text-slate-900 dark:text-white">Gregorian (AD) standards</strong> regardless of which calendar you use for input. This prevents the common discrepancy where different calendar systems (with variable month lengths) produce slightly different day counts for the same life duration.
-              </p>
-            </section>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="p-8 bg-slate-50 dark:bg-slate-800/50 rounded-[2.5rem] border border-slate-100 dark:border-slate-800">
-                <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4">Total Life Statistics</h3>
-                <p className="text-sm text-slate-600 dark:text-slate-400 leading-loose">
-                  Ever wondered how many weeks you've been alive? Or how many months? Our tool breaks down your entire existence into understandable units, giving you a unique perspective on your own timeline.
-                </p>
-              </div>
-              <div className="p-8 bg-slate-50 dark:bg-slate-800/50 rounded-[2.5rem] border border-slate-100 dark:border-slate-800">
-                <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4">Accuracy and Reliability</h3>
-                <p className="text-sm text-slate-600 dark:text-slate-400 leading-loose">
-                  We handle the complex leap year rules of the Gregorian calendar and the variable month lengths of the Bikram Sambat system, ensuring that whether you were born in 2040 BS or 1995 AD, your results are 100% accurate.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="space-y-8">
-            <div className="p-10 bg-emerald-600 rounded-[3rem] text-white space-y-6">
-              <h3 className="text-2xl font-black">Calendar Insights</h3>
-              <ul className="space-y-4">
-                {[
-                  "Nepali months vary from 29 to 32 days.",
-                  "New Year (Baisakh 1) falls in mid-April.",
-                  "BS is mid-way between Solar & Lunar cycle.",
-                  "AD is strictly a Solar calendar system."
-                ].map((insight, i) => (
-                  <li key={i} className="flex gap-3 text-sm font-bold opacity-90">
-                    <div className="w-1.5 h-1.5 bg-white rounded-full mt-1.5 shrink-0" />
-                    {insight}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="flex flex-wrap gap-2">
-              {[
-                "AgeCalculator", "NepaliAge", "BikramSambat", "Gregorian", 
-                "LifeTracker", "NepalCalendar", "BirthStatistics", "AgeInWeeks"
-              ].map(tag => (
-                <span key={tag} className="px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-full text-[10px] font-black uppercase text-slate-500 tracking-widest leading-none">
-                  #{tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
+      {/* SEO Optimized Publisher Content */}
+      <div className="prose prose-slate dark:prose-invert max-w-4xl mx-auto mt-16 p-8 bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800">
+        <h2>Precise Age Calculation Across Dual Calendars</h2>
+        <p>Calculating age accurately in Nepal requires navigating the complexities of two entirely different chronological systems: the Gregorian calendar (AD) and the Bikram Sambat (BS). The Age Calculator is engineered to accept inputs in either system, parse the dates into a unified timestamp, and compute the exact lifespan of an individual in years, months, and days.</p>
+        <h3>Algorithmic Approach to Lifespan Metrics</h3>
+        <p>To ensure mathematical absolute consistency, the engine standardizes all calculations onto the Gregorian timeline. When a user inputs a Bikram Sambat date, the system queries an embedded astronomical database to seamlessly translate the BS date into an exact AD equivalent. Once the normalized Date object is established, the calculator extracts the temporal difference between the birth date and the current system time.</p>
+        <p>The tool manages edge cases like leap years, variable month lengths, and negative day remainders during the subtraction process. By utilizing modulo arithmetic and time-value integers, it also accurately abstracts the total days, weeks, and months lived. This precision makes it indispensable for verifying age limits for government exams, banking, and legal document processing.</p>
+        <hr className="my-8 border-slate-200 dark:border-slate-800" />
+        <h3>Related Reading</h3>
+        <p>Want to learn more about the celestial mechanics behind Nepali dates? Check out our guide: <Link to="/blog/understanding-bikram-sambat" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-semibold transition-colors duration-200">Understanding the Bikram Sambat (BS) Calendar</Link>.</p>
       </div>
     </div>
   );
 }
-

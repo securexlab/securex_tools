@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Maximize, Grid, Info, RefreshCw } from "lucide-react";
 import { cn } from "../lib/utils";
 import BackButton from "../components/BackButton";
+import ToolSeoSection from "../components/ToolSeoSection";
 
 export default function LandConverter() {
   const [activeSystem, setActiveSystem] = useState("hilly"); // hilly (Ropani) or terai (Bigha)
@@ -142,48 +144,17 @@ export default function LandConverter() {
         </div>
       </div>
 
-      {/* SEO Content Section */}
-      <div className="mt-16 pt-16 border-t border-slate-200 dark:border-slate-800">
-        <div className="max-w-4xl mx-auto space-y-12">
-          <section className="space-y-4">
-            <h2 className="text-3xl font-bold">Comprehensive Nepali Land Unit Converter</h2>
-            <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
-              Real estate measurement in Nepal is unique because of its two distinct systems. Our <strong>Land Converter</strong> simplifies the complex process of converting traditional Nepali units like <strong>Ropani, Aana, Bigha, and Kattha</strong> into modern <strong>Square Feet</strong> and <strong>Square Meters</strong>.
-            </p>
-          </section>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-8 bg-blue-600 rounded-[3rem] text-white space-y-4 shadow-xl shadow-blue-500/20">
-              <h3 className="font-bold text-lg flex items-center gap-2">
-                <Grid className="w-5 h-5 text-blue-200" />
-                Hilly vs. Terai
-              </h3>
-              <p className="text-xs opacity-90 leading-relaxed font-medium">
-                In the Hilly regions (including Kathmandu Valley), the <strong>Ropani-Aana-Paisa-Daam (RAPD)</strong> system is standard. In the Terai plains (Madhesh), the <strong>Bigha-Kattha-Dhur (BKD)</strong> system is used. Our tool handles both flawlessly.
-              </p>
-            </div>
-            <div className="space-y-4">
-              <h3 className="font-bold text-xl text-slate-800 dark:text-slate-200">Standard Conversion Factors</h3>
-              <ul className="text-sm text-slate-500 space-y-3 list-disc pl-4">
-                <li><strong>1 Ropani</strong> = 5476 Square Feet</li>
-                <li><strong>1 Aana</strong> = 342.25 Square Feet</li>
-                <li><strong>1 Bigha</strong> = 72900 Square Feet</li>
-                <li><strong>1 Kattha</strong> = 3645 Square Feet</li>
-                <li><strong>1 Dhur</strong> = 182.25 Square Feet</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="p-10 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[3rem] space-y-6">
-            <h4 className="text-xl font-bold flex items-center gap-2">
-                <Info className="w-5 h-5 text-blue-600" />
-                Who is this for?
-            </h4>
-            <p className="text-sm text-slate-500 leading-relaxed">
-                This tool is essential for <strong>real estate agents, land buyers/sellers, architects, and civil engineers</strong> working in Nepal. When looking at a <strong>Lalpurja</strong> (land ownership certificate), you will see units in the traditional format; use this calculator to visualize the physical size in more familiar metric or imperial units before making property decisions.
-            </p>
-          </div>
-        </div>
+      {/* SEO Optimized Publisher Content */}
+      <div className="prose prose-slate dark:prose-invert max-w-4xl mx-auto mt-16 p-8 bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800">
+        <h2>Decoding Nepal's Traditional Land Measurement Systems</h2>
+        <p>Understanding and converting traditional Nepali land measurement units is essential for real estate transactions, architectural planning, and legal property registration. Our Land Converter accurately translates local metrics from the Hilly and Terai regions into universal standard units like Square Feet and Square Meters.</p>
+        <h3>The Mathematics of the Hilly System (Ropani)</h3>
+        <p>In the mountainous and hilly regions of Nepal, including the Kathmandu Valley, land is traditionally measured using the Ropani system. The hierarchy is mathematically structured as follows: 1 Ropani consists of 16 Aana; 1 Aana contains 4 Paisa; and 1 Paisa is composed of 4 Daam. In standard terms, one complete Ropani equates exactly to 5,476 square feet. This conversion tool automatically aggregates your inputs across these four tiers and calculates the precise total area.</p>
+        <h3>The Terai Measurement System (Bigha)</h3>
+        <p>Conversely, the southern plains (Terai) utilize the Bigha system, which represents significantly larger plots of land. Under this framework, 1 Bigha equals 20 Kattha, and 1 Kattha contains 20 Dhur. A single Bigha translates to a massive 72,900 square feet (roughly 6,772 square meters). By leveraging these strict mathematical ratios, the converter ensures that buyers, sellers, and engineers maintain total precision when evaluating property sizes across different geographical zones.</p>
+        <hr className="my-8 border-slate-200 dark:border-slate-800" />
+        <h3>Related Reading</h3>
+        <p>Want a deeper understanding of historical land metrics? Check out our detailed guide: <Link to="/blog/nepal-land-measurement-systems-explained" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-semibold transition-colors duration-200">Nepal Land Measurement Systems Explained</Link>.</p>
       </div>
     </div>
   );

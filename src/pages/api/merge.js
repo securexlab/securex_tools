@@ -1,170 +1,114 @@
-import formidable from "formidable";
-import fs from "fs";
-import axios from "axios";
+import formidable from 'formidable';
+import fs from 'fs';
+import axios from 'axios';
+import FormData from 'form-data';
 
-// Disable body parsing to handle multipart/form-data manually
+// Disable Next.js default body parser to allow formidable to consume the stream
 export const config = {
   api: {
     bodyParser: false,
   },
 };
 
-/**
- * Convert a file to PDF using Cloudmersive's Auto-Detect to PDF endpoint
- */
-async function convertToPdf(fileBuffer, fileName, apiKey) {
-  try {
-    const formData = new FormData();
-    const blob = new Blob([fileBuffer], { type: "application/octet-stream" });
-    formData.append("inputFile", blob, fileName);
-
-    const response = await axios.post(
-      "https://api.cloudmersive.com/convert/autodetect/to/pdf",
-      formData,
-      {
-        headers: {
-          ...formData.getHeaders(),
-          Apikey: apiKey,
-        },
-        responseType: "arraybuffer",
-        timeout: 60000,
-      }
-    );
-
-    return Buffer.from(response.data);
-  } catch (error) {
-    console.error(`Error converting ${fileName} to PDF:`, error.message);
-    throw new Error(`Failed to convert ${fileName} to PDF: ${error.message}`);
-  }
-}
-
-/**
- * Merge multiple PDF buffers using Cloudmersive's Merge Multiple PDFs endpoint
- */
-async function mergePdfs(pdfBuffers, apiKey) {
-  try {
-    const formData = new FormData();
-
-    // Append each PDF buffer as a file
-    pdfBuffers.forEach((buffer, index) => {
-      const blob = new Blob([buffer], { type: "application/pdf" });
-      formData.append("inputFiles", blob, `document-${index + 1}.pdf`);
-    });
-
-    const response = await axios.post(
-      "https://api.cloudmersive.com/convert/merge/pdf/multi",
-      formData,
-      {
-        headers: {
-          ...formData.getHeaders(),
-          Apikey: apiKey,
-        },
-        responseType: "arraybuffer",
-        timeout: 60000,
-      }
-    );
-
-    return Buffer.from(response.data);
-  } catch (error) {
-    console.error("Error merging PDFs:", error.message);
-    throw new Error(`Failed to merge PDFs: ${error.message}`);
-  }
-}
-
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 
   const apiKey = process.env.CLOUDMERSIVE_API_KEY;
   if (!apiKey) {
-    return res.status(500).json({ error: "Cloudmersive API key not configured" });
+    return res.status(401).json({ error: 'API key not configured' });
   }
 
   try {
-    // Parse multipart/form-data using formidable
-    const form = formidable({
-      multiples: true,
-      maxFileSize: 50 * 1024 * 1024, // 50 MB
+    const form = formidable({ multiples: true });
+    const [fields, files] = await new Promise((resolve, reject) => {
+      form.parse(req, (err, fields, files) => {
+        if (err) reject(err);
+        resolve([fields, files]);
+      });
     });
 
-    const [fields, files] = await form.parse(req);
-
-    // Handle both single and multiple files
-    let uploadedFiles = files.files || [];
+    // Handle both single and multiple file uploads safely
+    let uploadedFiles = files.files;
+    if (!uploadedFiles) {
+      return res.status(400).json({ error: 'No files uploaded' });
+    }
+    
     if (!Array.isArray(uploadedFiles)) {
       uploadedFiles = [uploadedFiles];
     }
 
-    if (uploadedFiles.length === 0) {
-      return res.status(400).json({ error: "No files uploaded" });
-    }
-
     if (uploadedFiles.length < 2) {
-      return res.status(400).json({
-        error: "Please upload at least 2 files to merge",
-      });
+      return res.status(400).json({ error: 'At least 2 files are required for merging' });
     }
 
-    // Process each file: convert to PDF if needed
     const pdfBuffers = [];
 
+    // 1. Process each file: If not PDF, convert to PDF
     for (const file of uploadedFiles) {
-      try {
-        const fileBuffer = fs.readFileSync(file.filepath);
-        const fileName = file.originalFilename || file.filename;
-        const ext = fileName.split(".").pop().toLowerCase();
+      const fileBuffer = fs.readFileSync(file.filepath);
+      const ext = file.originalFilename.split('.').pop().toLowerCase();
 
-        let pdfBuffer;
+      if (ext === 'pdf') {
+        pdfBuffers.push(fileBuffer);
+      } else {
+        // Convert non-PDF to PDF using Cloudmersive
+        const convertData = new FormData();
+        convertData.append('inputFile', fileBuffer, file.originalFilename);
 
-        if (ext === "pdf") {
-          // Already a PDF, use as-is
-          pdfBuffer = fileBuffer;
-          console.log(`[Merge] Using PDF file: ${fileName}`);
-        } else {
-          // Convert to PDF using Cloudmersive
-          console.log(`[Merge] Converting ${ext.toUpperCase()} to PDF: ${fileName}`);
-          pdfBuffer = await convertToPdf(fileBuffer, fileName, apiKey);
-        }
-
-        pdfBuffers.push(pdfBuffer);
-      } catch (error) {
-        console.error(`Error processing file:`, error.message);
-        throw error;
+        const convertRes = await axios.post(
+          'https://api.cloudmersive.com/convert/autodetect/to/pdf',
+          convertData,
+          {
+            headers: {
+              ...convertData.getHeaders(),
+              'Apikey': apiKey,
+            },
+            responseType: 'arraybuffer',
+            timeout: 60000,
+          }
+        );
+        pdfBuffers.push(convertRes.data);
       }
     }
 
-    if (pdfBuffers.length === 0) {
-      return res.status(400).json({ error: "No valid files to merge" });
-    }
+    // 2. Merge all PDFs into one
+    const mergeData = new FormData();
+    pdfBuffers.forEach((buffer, index) => {
+      mergeData.append('inputFiles', buffer, `document_${index + 1}.pdf`);
+    });
 
-    // Merge all PDFs
-    console.log(`[Merge] Merging ${pdfBuffers.length} PDF files...`);
-    const mergedPdf = await mergePdfs(pdfBuffers, apiKey);
-
-    // Return the merged PDF
-    res.setHeader("Content-Type", "application/pdf");
-    res.setHeader(
-      "Content-Disposition",
-      `attachment; filename="merged-${Date.now()}.pdf"`
+    const mergeRes = await axios.post(
+      'https://api.cloudmersive.com/convert/merge/pdf/multi',
+      mergeData,
+      {
+        headers: {
+          ...mergeData.getHeaders(),
+          'Apikey': apiKey,
+        },
+        responseType: 'arraybuffer',
+        timeout: 60000, // 60s timeout for large files
+      }
     );
-    res.send(mergedPdf);
+
+    // 3. Send back the merged PDF file
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename="merged-${Date.now()}.pdf"`);
+    return res.status(200).send(mergeRes.data);
+
   } catch (error) {
-    console.error("[Merge API Error]:", error.message);
-
-    // Determine error message
-    let errorMsg = "Failed to merge documents";
-    if (error.response?.status === 401) {
-      errorMsg = "API key is invalid";
-    } else if (error.response?.status === 429) {
-      errorMsg = "Too many requests. Please try again later.";
-    } else if (error.message?.includes("timeout")) {
-      errorMsg = "Request timeout. Files may be too large or server is busy.";
+    let errorDetails = error.message;
+    if (error.response && error.response.data) {
+      // Decode arraybuffer to string if Cloudmersive sent a JSON error
+      errorDetails = Buffer.isBuffer(error.response.data) 
+        ? error.response.data.toString() 
+        : error.response.data;
     }
-
-    res.status(error.response?.status || 500).json({
-      error: errorMsg,
-      details: error.message,
+    console.error('Merge API Error:', errorDetails);
+    return res.status(error.response?.status || 500).json({ 
+      error: 'Failed to merge documents',
+      details: errorDetails
     });
   }
 }

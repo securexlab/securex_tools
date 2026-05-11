@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Zap, Receipt, Info, History, ArrowRight } from "lucide-react";
 import { cn } from "../lib/utils";
 import BackButton from "../components/BackButton";
@@ -120,48 +121,16 @@ export default function NeaCalculator() {
         </div>
       </div>
 
-      {/* SEO Content Section */}
-      <div className="mt-16 pt-16 border-t border-slate-200 dark:border-slate-800">
-        <div className="max-w-4xl mx-auto space-y-12">
-          <section className="space-y-4">
-            <h2 className="text-3xl font-bold">Understanding Your NEA Electricity Bill</h2>
-            <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed text-center">
-              Our <strong>NEA Bill Calculator</strong> helps you estimate your monthly electricity cost using the current tariff rates set by the Nepal Electricity Authority. It automatically factors in variable energy charges and fixed service charges based on your unit consumption.
-            </p>
-          </section>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-8 bg-blue-600 rounded-[3rem] text-white space-y-4 shadow-xl shadow-blue-500/20">
-              <h3 className="font-bold text-lg flex items-center gap-2">
-                <Receipt className="w-5 h-5 text-blue-200" />
-                The Slab System
-              </h3>
-              <p className="text-xs opacity-90 leading-relaxed font-medium">
-                NEA uses a Progressive Tariff system. This means the price per unit increases as you consume more electricity. For example, your first 20 units are much cheaper than units consumed after the 150-unit threshold. This system is designed to encourage energy conservation in domestic households.
-              </p>
-            </div>
-            <div className="space-y-4">
-              <h3 className="font-bold text-xl text-slate-800 dark:text-slate-200">How to reduce your bill?</h3>
-              <ul className="text-sm text-slate-500 space-y-3 list-disc pl-4">
-                <li>Switch to LED bulbs (they consume up to 80% less energy).</li>
-                <li>Unplug appliances when not in use to avoid phantom energy.</li>
-                <li>Use solar water heaters instead of electric geysers.</li>
-                <li>Monitor your units weekly to stay within lower-cost slabs.</li>
-                <li>Compare your consumption with our calculator to find leaks.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="p-10 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[3rem] space-y-6">
-            <h4 className="text-xl font-bold flex items-center gap-2">
-                <Info className="w-5 h-5 text-blue-600" />
-                Wait, Why is my bill higher?
-            </h4>
-            <p className="text-sm text-slate-500 leading-relaxed">
-                Your actual bill from NEA might include additional charges like <strong>Excise Duty</strong>, <strong>Arrears</strong> (previous unpaid bills), or <strong>Penalties</strong> for late payment. This tool provides an estimate based purely on <strong>Current Consumption</strong> charges including the service charge.
-            </p>
-          </div>
-        </div>
+      {/* SEO Optimized Publisher Content */}
+      <div className="prose prose-slate dark:prose-invert max-w-4xl mx-auto mt-16 p-8 bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800">
+        <h2>Deciphering Nepal Electricity Authority (NEA) Tariffs</h2>
+        <p>Calculating utility costs in Nepal involves understanding layered, progressive billing structures. The NEA Bill Calculator is specifically engineered to demystify domestic electricity bills for the standard 5A Single Phase connection. By automating the tariff logic set by the Nepal Electricity Authority, it provides households with exact cost projections based on monthly unit consumption.</p>
+        <h3>The Logic of Progressive Tiered Billing</h3>
+        <p>Unlike flat-rate pricing, the NEA utilizes a tiered pricing algorithm where the cost per unit increases as consumption crosses specific thresholds. The application's core logic models this exact progressive structure. It evaluates the input units against defined boundaries (e.g., 20, 30, 50, 150, 250 units). For instance, the first 20 units are billed at a minimal base rate, but as consumption spills into the next tier, only the remaining units are subjected to the higher multiplier.</p>
+        <p>Simultaneously, the system assigns a tier-specific fixed "Service Charge" that scales with usage. The engine mathematically aggregates the baseline energy charges across all breached slabs and adds the service charge, returning a mathematically exact total. This deterministic modeling ensures users can accurately audit their utility expenses without performing manual mathematics.</p>
+        <hr className="my-8 border-slate-200 dark:border-slate-800" />
+        <h3>Related Reading</h3>
+        <p>Explore more regarding regional metrics and mathematics in our article: <Link to="/blog/nepal-land-measurement-systems-explained" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-semibold transition-colors duration-200">Nepal Land and Mathematics Systems Explained</Link>.</p>
       </div>
     </div>
   );
