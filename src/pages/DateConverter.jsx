@@ -10,6 +10,7 @@ import {
   ArrowRight
 } from "lucide-react";
 import BackButton from "../components/BackButton";
+import RelatedReading from "../components/RelatedReading.jsx";
 import { cn } from "../lib/utils";
 
 const NEPALI_MONTHS = [
@@ -340,6 +341,7 @@ export default function DateConverter() {
           </div>
         </div>
       </div>
+    <RelatedReading category="date" />
     </div>
   );
 }

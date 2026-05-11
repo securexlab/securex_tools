@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Landmark, Briefcase, Zap, PieChart } from "lucide-react";
 import { cn } from "../lib/utils";
 import BackButton from "../components/BackButton";
+import RelatedReading from "../components/RelatedReading.jsx";
 
 export default function EmiCalculator() {
   const [activeTab, setActiveTab] = useState("bank"); // bank or sikada
@@ -170,6 +171,7 @@ export default function EmiCalculator() {
           </p>
         </div>
       </div>
+    <RelatedReading category="math" />
     </div>
   );
 }

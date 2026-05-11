@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Upload, X, FileText, Loader2, AlertCircle, CheckCircle2, Download } from "lucide-react";
 import BackButton from "../components/BackButton";
+import RelatedReading from "../components/RelatedReading.jsx";
 import { cn } from "../lib/utils";
 
 export default function FileMerger() {
@@ -315,6 +316,7 @@ export default function FileMerger() {
           </ul>
         </div>
       </div>
+      <RelatedReading category="file" />
     </div>
   );
 }

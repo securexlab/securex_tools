@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Maximize, Grid, Info, RefreshCw } from "lucide-react";
 import { cn } from "../lib/utils";
 import BackButton from "../components/BackButton";
+import RelatedReading from "../components/RelatedReading.jsx";
 
 export default function LandConverter() {
   const [activeSystem, setActiveSystem] = useState("hilly"); // hilly (Ropani) or terai (Bigha)
@@ -185,6 +186,7 @@ export default function LandConverter() {
           </div>
         </div>
       </div>
+      <RelatedReading category="land" />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Calculator, Wallet, TrendingUp, Info } from "lucide-react";
 import BackButton from "../components/BackButton";
+import RelatedReading from "../components/RelatedReading.jsx";
 
 export default function TaxCalculator() {
   const [salary, setSalary] = useState(50000);

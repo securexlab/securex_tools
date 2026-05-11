@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Plus, Trash2, GraduationCap, Award, BarChart3 } from "lucide-react";
 import { cn } from "../lib/utils";
+import RelatedReading from "../components/RelatedReading.jsx";
 import BackButton from "../components/BackButton";
 
 const gradePoints = {
@@ -175,6 +176,7 @@ export default function GpaCalculator() {
           </div>
         </div>
       </div>
+      <RelatedReading category="pdf" />
     </div>
   );
 }

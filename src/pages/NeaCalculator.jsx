@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Zap, Receipt, Info, History, ArrowRight } from "lucide-react";
 import { cn } from "../lib/utils";
+import RelatedReading from "../components/RelatedReading.jsx";
 import BackButton from "../components/BackButton";
 
 export default function NeaCalculator() {
@@ -163,6 +164,7 @@ export default function NeaCalculator() {
           </div>
         </div>
       </div>
+      <RelatedReading category="text" />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { UserCheck, ShieldAlert, CheckCircle2, XCircle, Info } from "lucide-react";
 import { cn } from "../lib/utils";
+import RelatedReading from "../components/RelatedReading.jsx";
 import BackButton from "../components/BackButton";
 
 export default function LokSewaAge() {
@@ -205,6 +206,7 @@ export default function LokSewaAge() {
           </div>
         </div>
       </div>
+      <RelatedReading category="math" /> 
     </div>
   );
 }

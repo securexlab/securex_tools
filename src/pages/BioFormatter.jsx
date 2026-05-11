@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Instagram, Twitter, Facebook, Copy, Check, Hash } from "lucide-react";
 import { cn } from "../lib/utils";
 import BackButton from "../components/BackButton";
+import RelatedReading from "../components/RelatedReading.jsx";
 
 const platformLimits = [
   { name: "Instagram", limit: 150, icon: Instagram, color: "pink" },
@@ -130,6 +131,7 @@ export default function BioFormatter() {
           </div>
         </div>
       </div>
+    <RelatedReading category="text" />
     </div>
   );
 }

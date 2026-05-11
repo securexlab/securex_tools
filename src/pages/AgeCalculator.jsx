@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import NepaliDate from "nepali-date-converter";
-import { User, Calendar, RefreshCw, Sparkles, History, Info } from "lucide-react";
+import { User, Calendar, RefreshCw, Sparkles, History, Info, BookOpen } from "lucide-react";
+import { Link } from "react-router-dom"; // Added for AdSense internal linking
 import BackButton from "../components/BackButton";
 import { cn } from "../lib/utils";
+import RelatedReading from '../components/RelatedReading';
 
 const NEPALI_MONTHS = [
   "Baisakh", "Jestha", "Ashadh", "Shrawan", "Bhadra", "Ashwin", 
@@ -327,6 +329,23 @@ export default function AgeCalculator() {
                 </p>
               </div>
             </div>
+
+            {/* AD-SENSE PUBLISHER CONTENT LINKING */}
+            <div className="p-10 bg-white dark:bg-slate-900 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-sm mt-8">
+              <div className="flex items-center gap-3 mb-4">
+                <BookOpen className="w-6 h-6 text-blue-600" />
+                <h3 className="text-2xl font-black text-slate-900 dark:text-white">Related Reading</h3>
+              </div>
+              <p className="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
+                Converting between AD and BS dates for calculations involves complex astronomical data because of the variable month lengths in the Bikram Sambat calendar. Learn more about how the official calendar of Nepal works and why simple math isn't enough for accurate conversion.
+              </p>
+              <Link
+                to="/blog/understanding-bikram-sambat"
+                className="inline-flex items-center text-sm font-bold text-blue-600 hover:text-blue-500 transition-colors bg-blue-50 dark:bg-blue-900/20 px-6 py-3 rounded-full"
+              >
+                Read: Understanding the Bikram Sambat (BS) Calendar &rarr;
+              </Link>
+            </div>
           </div>
 
           <div className="space-y-8">
@@ -360,7 +379,7 @@ export default function AgeCalculator() {
           </div>
         </div>
       </div>
+    <RelatedReading category="date" />
     </div>
   );
 }
-

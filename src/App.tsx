@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
+import ScrollToTop from "./components/ScrollToTop";
 import { ThemeProvider } from "./context/ThemeContext";
 
 
@@ -56,6 +57,7 @@ export default function App() {
   return (
     <ThemeProvider>
       <Layout>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           

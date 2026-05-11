@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Shield, Copy, Check, RefreshCw, Lock, Zap } from "lucide-react";
 import { cn } from "../lib/utils";
 import BackButton from "../components/BackButton";
+import RelatedReading from "../components/RelatedReading.jsx";
 
 export default function PasswordGenerator() {
   const [length, setLength] = useState(16);
@@ -188,6 +189,7 @@ export default function PasswordGenerator() {
           </div>
         </div>
       </div>
+    <RelatedReading category="security" />
     </div>
   );
 }

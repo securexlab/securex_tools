@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Table, Download, Upload, Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
 import BackButton from "../components/BackButton";
+import RelatedReading from "../components/RelatedReading.jsx";
 import { cn } from "../lib/utils";
 
 export default function ExcelToPdf() {
@@ -230,6 +231,7 @@ export default function ExcelToPdf() {
           </div>
         </div>
       </div>
+    <RelatedReading category="pdf" />
     </div>
   );
 }

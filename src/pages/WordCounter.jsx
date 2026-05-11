@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Trash2, Type, Clock, Hash, AlignLeft, FileText, Upload, Loader2 } from "lucide-react";
 import BackButton from "../components/BackButton";
+import RelatedReading from "../components/RelatedReading.jsx";
 import mammoth from "mammoth";
 import * as pdfjsLib from "pdfjs-dist";
 import pdfjsWorker from "pdfjs-dist/build/pdf.worker.mjs?url";
@@ -182,6 +183,7 @@ export default function WordCounter() {
           </section>
         </div>
       </div>
+    <RelatedReading category="text" />
     </div>
   );
 }

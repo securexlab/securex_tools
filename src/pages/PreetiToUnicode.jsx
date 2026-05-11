@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Keyboard, Copy, Check, Trash2, ArrowRightLeft, Info, HelpCircle } from "lucide-react";
 import { cn } from "../lib/utils";
 import BackButton from "../components/BackButton";
+import RelatedReading from "../components/RelatedReading.jsx";
 
 const preetiMap = [
     // Standard Characters
@@ -213,7 +214,7 @@ export default function PreetiToUnicode() {
                     <section className="space-y-4">
                         <h2 className="text-2xl font-bold">Why Convert Preeti Font to Unicode?</h2>
                         <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-                            Preeti is a legacy legacy font for typing Nepali. While widely used in newsrooms and printing houses across Nepal, it is not web-ready. Text typed in Preeti font looks like gibberish (example: <strong>xfd|f]</strong>) on devices that don't have the font installed. 
+                            Preeti is a legacy font for typing Nepali. While widely used in newsrooms and printing houses across Nepal, it is not web-ready. Text typed in Preeti font looks like gibberish (example: <strong>xfd|f]</strong>) on devices that don't have the font installed.
                         </p>
                         <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
                             <strong>Unicode Devanagari</strong>, on the other hand, is the global standard. Converting your Preeti text to Unicode ensures your content is readable on all mobile devices, tablets, and computers, making it perfect for Facebook, websites, and emails.
@@ -257,7 +258,7 @@ export default function PreetiToUnicode() {
                             </ul>
                         </div>
                     </section>
-                    
+
                     <div className="p-6 bg-blue-50 dark:bg-blue-900/10 rounded-2xl border border-blue-100 dark:border-blue-900/30 text-center">
                         <p className="text-sm text-blue-800/80 dark:text-blue-400/80 italic font-medium">
                             "SecureX Lab tools provide the most accurate Preeti to Unicode conversion in Nepal, supporting all major symbols and Alt-code characters."
@@ -265,6 +266,7 @@ export default function PreetiToUnicode() {
                     </div>
                 </div>
             </div>
+            <RelatedReading category="text" />
         </div>
     );
 }

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Copy, Check, Info, Keyboard, Trash2, ArrowRightLeft, HelpCircle } from "lucide-react";
 import { cn } from "../lib/utils";
+import RelatedReading from "../components/RelatedReading.jsx";
 import BackButton from "../components/BackButton";
 
 const layoutMap = {
@@ -296,6 +297,8 @@ export default function RomanToNepali() {
             </div>
         </div>
       </div>
+      
+      <RelatedReading category="date" />
     </div>
   );
 }

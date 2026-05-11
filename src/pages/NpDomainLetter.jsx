@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Download, Printer, FileText, Send, User, MapPin, Globe, Server, CheckCircle2, Mail, AlertTriangle } from "lucide-react";
 import BackButton from "../components/BackButton";
+import RelatedReading from "../components/RelatedReading.jsx";
 import { cn } from "../lib/utils";
 
 export default function NpDomainLetter() {
@@ -298,6 +299,7 @@ export default function NpDomainLetter() {
           </div>
         </div>
       </div>
+      <RelatedReading category="pdf" />
     </div>
   );
 }

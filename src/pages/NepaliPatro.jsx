@@ -14,6 +14,7 @@ import {
   X
 } from "lucide-react";
 import BackButton from "../components/BackButton";
+import RelatedReading from "../components/RelatedReading.jsx";
 import { cn } from "../lib/utils";
 
 const MONTHS = [
@@ -930,6 +931,7 @@ export default function NepaliPatro() {
           </div>
         </div>
       </div>
+    <RelatedReading category="date" />
     </div>
   );
 }

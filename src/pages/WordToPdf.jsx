@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { FileText, Download, Upload, Loader2, AlertCircle, CheckCircle2, FileVideo } from "lucide-react";
 import BackButton from "../components/BackButton";
+import RelatedReading from "../components/RelatedReading.jsx";
 import { cn } from "../lib/utils";
 
 export default function WordToPdf() {
@@ -243,6 +244,7 @@ export default function WordToPdf() {
           </div>
         </div>
       </div>
+    <RelatedReading category="pdf" />
     </div>
   );
 }

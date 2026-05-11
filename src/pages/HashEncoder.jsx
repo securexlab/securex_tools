@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Copy, Check, Hash as HashIcon, ArrowRight, ShieldCheck, Lock } from "lucide-react";
 import { cn } from "../lib/utils";
 import BackButton from "../components/BackButton";
+import RelatedReading from "../components/RelatedReading.jsx";
 
 export default function HashEncoder() {
   const [input, setInput] = useState("");
@@ -136,6 +137,7 @@ export default function HashEncoder() {
           </div>
         </div>
       </div>
+    <RelatedReading category="security" />
     </div>
   );
 }

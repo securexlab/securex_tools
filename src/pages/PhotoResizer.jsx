@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { Upload, Download, Image as ImageIcon, Check, Info, FileText } from "lucide-react";
 import { cn } from "../lib/utils";
 import BackButton from "../components/BackButton";
+import RelatedReading from "../components/RelatedReading.jsx";
 
 const presets = [
   { name: "Lok Sewa Photo", width: 350, height: 450, label: "350x450 px", maxSize: 200, icon: ImageIcon },
@@ -188,6 +189,7 @@ export default function PhotoResizer() {
           </div>
         </div>
       </div>
+    <RelatedReading category="pdf" />
     </div>
   );
 }

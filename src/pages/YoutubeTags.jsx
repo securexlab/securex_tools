@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Youtube, Search, Copy, Check, Hash, Sparkles } from "lucide-react";
 import { cn } from "../lib/utils";
+import RelatedReading from "../components/RelatedReading.jsx";
 import BackButton from "../components/BackButton";
 
 const tagGroups = [
@@ -150,6 +151,7 @@ export default function YoutubeTags() {
           </div>
         </div>
       </div>
+      <RelatedReading category="security" />
     </div>
   );
 }
