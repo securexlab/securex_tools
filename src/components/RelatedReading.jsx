@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { BookOpen } from 'lucide-react';
 
 function RelatedReading({ category }) {
@@ -30,7 +30,7 @@ function RelatedReading({ category }) {
       linkText: "Read: Nepal Land Measurement Explained \u2192",
       path: "/blog/nepal-land-measurement-systems-explained"
     }
-  };
+  }; 
 
   // If someone forgets to pass a category, default to the date blog
   const content = contentMap[category] || contentMap.date;
@@ -45,7 +45,7 @@ function RelatedReading({ category }) {
         {content.description}
       </p>
       <Link
-        to={content.path}
+        href={content.path}
         className="inline-flex items-center text-sm font-bold text-blue-600 hover:text-blue-500 transition-colors bg-blue-50 dark:bg-blue-900/20 px-6 py-3 rounded-full"
       >
         {content.linkText}

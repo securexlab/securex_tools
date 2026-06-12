@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import NepaliDate from "nepali-date-converter";
-import { User, Calendar, RefreshCw, Sparkles, History, Info, BookOpen } from "lucide-react";
-import { Link } from "react-router-dom"; // Added for AdSense internal linking
+import { User, Calendar, RefreshCw, Sparkles, History, Info, BookOpen, AlertCircle } from "lucide-react";
+import Link from "next/link"; // Added for AdSense internal linking
 import BackButton from "../components/BackButton";
 import { cn } from "../lib/utils";
 import RelatedReading from '../components/RelatedReading';
@@ -27,6 +27,7 @@ const convertDevanagariToEnglish = (str) => {
 export default function AgeCalculator() {
   const [activeTab, setActiveTab] = useState("AD");
   const [ageDetails, setAgeDetails] = useState(null);
+  const [error, setError] = useState("");
 
   const now = new Date();
   const todayBS = new NepaliDate();
@@ -65,6 +66,7 @@ export default function AgeCalculator() {
   };
 
   const calculateAdAge = () => {
+    setError("");
     const y = parseInt(adYear);
     const m = parseInt(adMonth);
     const d = parseInt(adDay);
@@ -78,7 +80,8 @@ export default function AgeCalculator() {
     birth.setHours(0, 0, 0, 0);
 
     if (birth > today) {
-      alert("Date of birth cannot be in the future!");
+      setError("Date of birth cannot be in the future!");
+      setAgeDetails(null);
       return;
     }
 
@@ -95,6 +98,7 @@ export default function AgeCalculator() {
 
   const calculateBsAge = () => {
     try {
+      setError("");
       const y = parseInt(convertDevanagariToEnglish(bsYear));
       const m = parseInt(bsMonth);
       const d = parseInt(convertDevanagariToEnglish(bsDay));
@@ -109,7 +113,8 @@ export default function AgeCalculator() {
       todayAd.setHours(0, 0, 0, 0);
 
       if (birthAd > todayAd) {
-        alert("Date of birth cannot be in the future!");
+        setError("Date of birth cannot be in the future!");
+        setAgeDetails(null);
         return;
       }
 
@@ -125,7 +130,8 @@ export default function AgeCalculator() {
         format: "BS"
       });
     } catch (err) {
-      alert("Error: " + err.message);
+      setError("Error: " + err.message);
+      setAgeDetails(null);
     }
   };
 
@@ -142,7 +148,7 @@ export default function AgeCalculator() {
           {["AD", "BS"].map((tab) => (
             <button
               key={tab}
-              onClick={() => { setActiveTab(tab); setAgeDetails(null); }}
+              onClick={() => { setActiveTab(tab); setAgeDetails(null); setError(""); }}
               className={cn(
                 "px-10 py-3 rounded-[1.5rem] font-black transition-all text-sm",
                 activeTab === tab 
@@ -224,6 +230,13 @@ export default function AgeCalculator() {
                 </select>
               </div>
             </div>
+
+            {error && (
+              <div className="p-4 bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 rounded-2xl flex items-center gap-3 text-red-600 dark:text-red-400 text-sm">
+                <AlertCircle className="w-5 h-5 shrink-0" />
+                {error}
+              </div>
+            )}
 
             <button 
               onClick={activeTab === "AD" ? calculateAdAge : calculateBsAge}
@@ -340,7 +353,7 @@ export default function AgeCalculator() {
                 Converting between AD and BS dates for calculations involves complex astronomical data because of the variable month lengths in the Bikram Sambat calendar. Learn more about how the official calendar of Nepal works and why simple math isn't enough for accurate conversion.
               </p>
               <Link
-                to="/blog/understanding-bikram-sambat"
+                href="/blog/understanding-bikram-sambat"
                 className="inline-flex items-center text-sm font-bold text-blue-600 hover:text-blue-500 transition-colors bg-blue-50 dark:bg-blue-900/20 px-6 py-3 rounded-full"
               >
                 Read: Understanding the Bikram Sambat (BS) Calendar &rarr;

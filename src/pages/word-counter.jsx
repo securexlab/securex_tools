@@ -4,11 +4,9 @@ import BackButton from "../components/BackButton";
 import RelatedReading from "../components/RelatedReading.jsx";
 import mammoth from "mammoth";
 import * as pdfjsLib from "pdfjs-dist";
-import pdfjsWorker from "pdfjs-dist/build/pdf.worker.mjs?url";
 
-// Set worker for pdfjs
-pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
+pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 export default function WordCounter() {
   const [text, setText] = useState("");
   const [isLoading, setIsLoading] = useState(false);

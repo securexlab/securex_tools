@@ -27,6 +27,43 @@ const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 // In-memory cache for calendar data
 const calendarCache = new Map();
 
+// Add the URL to your hosted Parva API server here. 
+// If using an environment variable, use process.env.NEXT_PUBLIC_API_URL
+// Example: const API_BASE_URL = "https://my-parva-api-server.com";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "";
+
+// Isolate the clock to prevent the entire calendar from re-rendering every second
+function LiveClock() {
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  if (!mounted) {
+    return <span className="text-3xl font-black text-slate-500 opacity-50">--:-- --</span>;
+  }
+
+  return (
+    <>
+      <span className="text-3xl font-black">
+        {currentTime.toLocaleTimeString('en-US', { 
+          timeZone: 'Asia/Kathmandu', 
+          hour: '2-digit', 
+          minute: '2-digit', 
+          hour12: true 
+        })}
+      </span>
+      <span className="text-xs font-bold text-slate-400">
+        :{new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Kathmandu', second: '2-digit' }).format(currentTime)}
+      </span>
+    </>
+  );
+}
+
 export default function NepaliPatro() {
   const [selectedYear, setSelectedYear] = useState(2083);
   const [selectedMonth, setSelectedMonth] = useState(1); // 1-indexed
@@ -35,16 +72,9 @@ export default function NepaliPatro() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedDay, setSelectedDay] = useState(null);
-  const [currentTime, setCurrentTime] = useState(new Date());
   const [showAllEvents, setShowAllEvents] = useState(false);
   const [showPastEvents, setShowPastEvents] = useState(false);
   const [showDayDetailModal, setShowDayDetailModal] = useState(false);
-
-  // Clock Ticker
-  useEffect(() => {
-    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
-    return () => clearInterval(timer);
-  }, []);
 
   const fetchCalendarData = useCallback(async (year, month, force = false) => {
     const cacheKey = `${year}-${month}`;
@@ -74,8 +104,8 @@ export default function NepaliPatro() {
       }
       
       const urls = [
-        `/api/patro?year=${adYear}&month=${adMonth}`,
-        `/api/patro?year=${adMonth === 12 ? adYear + 1 : adYear}&month=${adMonth === 12 ? 1 : adMonth + 1}`
+        `${API_BASE_URL}/api/patro?year=${adYear}&month=${adMonth}`,
+        `${API_BASE_URL}/api/patro?year=${adMonth === 12 ? adYear + 1 : adYear}&month=${adMonth === 12 ? 1 : adMonth + 1}`
       ];
 
       const responses = await Promise.all(urls.map(url => fetch(url)));
@@ -174,7 +204,7 @@ export default function NepaliPatro() {
     const initToday = async () => {
       setLoading(true);
       try {
-        const resp = await fetch('/api/today');
+        const resp = await fetch(`${API_BASE_URL}/api/today`);
         if (resp.ok) {
           const data = await resp.json();
           setTodayData(data);
@@ -222,7 +252,7 @@ export default function NepaliPatro() {
   const fetchDayDetails = useCallback(async (adDate) => {
     setDetailsLoading(true);
     try {
-      const resp = await fetch(`/api/convert-ad-to-bs?year=${adDate.split('-')[0]}&month=${adDate.split('-')[1]}&day=${adDate.split('-')[2]}`);
+      const resp = await fetch(`${API_BASE_URL}/api/convert-ad-to-bs?year=${adDate.split('-')[0]}&month=${adDate.split('-')[1]}&day=${adDate.split('-')[2]}`);
       if (resp.ok) {
         const data = await resp.json();
         setDayDetails(data);
@@ -306,20 +336,7 @@ export default function NepaliPatro() {
              <div>
                 <p className="text-[10px] font-black uppercase text-slate-400 tracking-widest">Kathmandu Time</p>
                 <div className="flex items-baseline gap-2">
-                   <span className="text-3xl font-black">
-                    {currentTime.toLocaleTimeString('en-US', { 
-                      timeZone: 'Asia/Kathmandu', 
-                      hour: '2-digit', 
-                      minute: '2-digit', 
-                      hour12: true 
-                    })}
-                    </span>
-                    <span className="text-xs font-bold text-slate-400">
-                    :{new Intl.DateTimeFormat('en-US', { 
-                        timeZone: 'Asia/Kathmandu', 
-                        second: '2-digit' 
-                      }).format(currentTime)}
-                    </span>
+                  <LiveClock />
                 </div>
              </div>
           </div>

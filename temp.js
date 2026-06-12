@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { BookOpen } from "lucide-react";
 function RelatedReading({ category }) {
   const contentMap = {

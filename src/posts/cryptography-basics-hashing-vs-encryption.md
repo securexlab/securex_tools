@@ -12,15 +12,15 @@ Whether you are a developer building a login system or a user trying to protect 
 Encryption is the process of scrambling plaintext data into an unreadable format using a specific cryptographic key. 
 
 The defining characteristic of encryption is that it is **reversible**. If an authorized party has the correct decryption key, they can revert the scrambled data back into its original, readable form.
-* **Use Case:** Encrypting a private message before sending it over the internet, or encrypting sensitive files stored on a hard drive.
-* **Algorithms:** AES-256, RSA.
+* Use Case: Encrypting a private message before sending it over the internet, or encrypting sensitive files stored on a hard drive.
+* Algorithms: AES-256, RSA.
 
 ## Hashing: The One-Way Mathematical Trapdoor
 Hashing, unlike encryption, is a **one-way function**. When you pass data through a hashing algorithm, it generates a fixed-length string of characters called a "hash" or "digest." 
 
 Crucially, it is mathematically impossible to reverse a hash back into its original plaintext. Even changing a single capitalized letter in a 1,000-word document will completely change the resulting hash output.
-* **Use Case:** Storing user passwords. When a user creates a password, the server hashes it and stores the hash. When the user logs in, the server hashes the entered password and compares the two hashes. The server never actually knows the plaintext password.
-* **Algorithms:** SHA-256, Bcrypt, Argon2.
+* Use Case: Storing user passwords. When a user creates a password, the server hashes it and stores the hash. When the user logs in, the server hashes the entered password and compares the two hashes. The server never actually knows the plaintext password.
+* Algorithms: SHA-256, Bcrypt, Argon2.
 
 ### Why MD5 is Now Considered Dangerous
 Historically, the MD5 hashing algorithm was the industry standard. Today, it is considered broken. Due to advances in computing power, hackers can use "rainbow tables" (massive databases of pre-computed hashes) to reverse-engineer MD5 hashes in seconds. Modern systems must rely on slower, salt-enabled algorithms like Bcrypt to prevent brute-force attacks.

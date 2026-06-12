@@ -1,47 +1,51 @@
-const postModules = import.meta.glob('../posts/*.md', { query: '?raw', import: 'default', eager: true });
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
 
-function parseFrontMatter(rawText) {
-  const frontMatterRegex = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?/;
-  const match = rawText.match(frontMatterRegex);
-  const metadata = {};
-  let content = rawText;
+// Pointing to your src/posts folder
+const postsDirectory = path.join(process.cwd(), 'src/posts');
 
-  if (match) {
-    const rawMeta = match[1];
-    content = rawText.slice(match[0].length).trim();
-    rawMeta.split(/\r?\n/).forEach((line) => {
-      const [key, ...rest] = line.split(':');
-      if (!key) return;
-      let value = rest.join(':').trim();
-      if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
-        value = value.slice(1, -1);
-      }
-      metadata[key.trim()] = value;
-    });
-  }
+export function getSortedPostsData() {
+  // Get file names under /src/posts
+  const fileNames = fs.readdirSync(postsDirectory);
+  const allPostsData = fileNames.map((fileName) => {
+    // Remove ".md" from file name to get the slug
+    const slug = fileName.replace(/\.md$/, '');
 
-  return { metadata, content };
-}
+    // Read markdown file as string
+    const fullPath = path.join(postsDirectory, fileName);
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
 
-const posts = Object.entries(postModules)
-  .map(([filePath, raw]) => {
-    const slug = filePath
-      .split('/')
-      .pop()
-      .replace(/\.md$/, '');
-    const { metadata, content } = parseFrontMatter(raw.default ?? raw);
+    // Use gray-matter to parse the post metadata section
+    const matterResult = matter(fileContents);
+
+    // Combine the data with the slug
     return {
       slug,
-      content,
-      ...metadata,
+      ...matterResult.data,
     };
-  })
-  .sort((a, b) => (a.date < b.date ? 1 : -1));
+  });
 
-export function getAllPosts() {
-  return posts;
+  // Sort posts by date
+  return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
-export function getPostBySlug(slug) {
-  return posts.find((post) => post.slug === slug);
+export function getAllPostSlugs() {
+  const fileNames = fs.readdirSync(postsDirectory);
+  return fileNames.map((fileName) => ({
+    params: { slug: fileName.replace(/\.md$/, '') },
+  }));
+}
+
+export function getPostData(slug) {
+  const fullPath = path.join(postsDirectory, `${slug}.md`);
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const matterResult = matter(fileContents);
+
+  // Return the slug, the markdown content, and the frontmatter data
+  return {
+    slug,
+    content: matterResult.content,
+    ...matterResult.data,
+  };
 }

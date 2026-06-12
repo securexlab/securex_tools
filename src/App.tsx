@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
-import Home from "./pages/Home";
+import Home from "./pages";
 import ScrollToTop from "./components/ScrollToTop";
 import { ThemeProvider } from "./context/ThemeContext";
 
@@ -49,8 +49,8 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
 
 // Blog Pages
-import BlogIndex from "./pages/blog/BlogIndex";
-import BlogPost from "./pages/blog/BlogPost";
+import BlogIndex from "./pages/blog";
+import BlogPost from "./pages/blog/[slug].jsx";
 
 // Landing Page & Navigation Components
 export default function App() {

@@ -1,10 +1,10 @@
 import React, { useState, useRef } from "react";
-import { FileText, Download, Upload, Loader2, AlertCircle, CheckCircle2, FileVideo } from "lucide-react";
+import { FileText, Download, Upload, Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
 import BackButton from "../components/BackButton";
 import RelatedReading from "../components/RelatedReading.jsx";
 import { cn } from "../lib/utils";
 
-export default function WordToPdf() {
+export default function PdfToWord() {
   const [file, setFile] = useState(null);
   const [isConverting, setIsConverting] = useState(false);
   const [error, setError] = useState("");
@@ -15,23 +15,13 @@ export default function WordToPdf() {
     setError("");
     if (!selectedFile) return;
 
-    const allowedTypes = [
-      "application/msword", 
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-    ];
-    
-    // Check extension as well just in case MIME type is flaky
-    const ext = selectedFile.name.split('.').pop().toLowerCase();
-    const isWord = allowedTypes.includes(selectedFile.type) || ext === 'doc' || ext === 'docx';
-
-    if (!isWord) {
-      setError("Please upload a valid Word document (.doc or .docx).");
+    if (selectedFile.type !== "application/pdf") {
+      setError("Please upload a valid PDF file.");
       return;
     }
 
     if (selectedFile.size > 3670016) {
       setError("File size exceeds 3.5 MB limit. Please upload a smaller file.");
-      alert("File size exceeds 3.5 MB limit. Please upload a smaller file.");
       return;
     }
 
@@ -65,7 +55,7 @@ export default function WordToPdf() {
     formData.append("file", file);
 
     try {
-      const response = await fetch("/api/convert-word", {
+      const response = await fetch("/api/convert-pdf", {
         method: "POST",
         body: formData,
       });
@@ -91,14 +81,13 @@ export default function WordToPdf() {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = file.name.replace(/\.(docx|doc)$/, ".pdf");
+      a.download = file.name.replace(".pdf", ".docx");
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
     } catch (err) {
       setError(err.message);
-      alert("Error: " + err.message);
     } finally {
       setIsConverting(false);
     }
@@ -110,8 +99,8 @@ export default function WordToPdf() {
       
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Word to PDF Converter</h1>
-          <p className="text-slate-500 dark:text-slate-400 mt-1">Transform your Word (.doc, .docx) documents into professional PDF files instantly.</p>
+          <h1 className="text-3xl font-bold tracking-tight">PDF to Word Converter</h1>
+          <p className="text-slate-500 dark:text-slate-400 mt-1">Easily convert your PDF documents to editable Microsoft Word (.docx) files.</p>
         </div>
       </div>
 
@@ -132,7 +121,7 @@ export default function WordToPdf() {
               type="file" 
               ref={fileInputRef}
               onChange={(e) => handleFileChange(e.target.files[0])}
-              accept=".doc,.docx"
+              accept=".pdf"
               className="hidden"
             />
             
@@ -161,7 +150,7 @@ export default function WordToPdf() {
                   <Upload className="w-8 h-8" />
                 </div>
                 <div className="space-y-1">
-                  <p className="font-bold text-slate-800 dark:text-slate-200">Click or drag Word (.docx) here</p>
+                  <p className="font-bold text-slate-800 dark:text-slate-200">Click or drag PDF here</p>
                   <p className="text-sm text-slate-500">Max file size: 3.5 MB</p>
                 </div>
               </>
@@ -188,12 +177,12 @@ export default function WordToPdf() {
             {isConverting ? (
               <>
                 <Loader2 className="w-5 h-5 animate-spin" />
-                Converting Word...
+                Converting Document...
               </>
             ) : (
               <>
                 <Download className="w-5 h-5" />
-                Convert to PDF (.pdf)
+                Convert to Word (.docx)
               </>
             )}
           </button>
@@ -204,47 +193,46 @@ export default function WordToPdf() {
       <div className="mt-16 pt-16 border-t border-slate-200 dark:border-slate-800">
         <div className="max-w-3xl mx-auto space-y-10">
           <section className="space-y-4">
-            <h2 className="text-2xl font-bold">Secure Word to PDF Conversion</h2>
+            <h2 className="text-2xl font-bold">Fast & Accurate PDF to Word Conversion</h2>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-lg">
-              Generate pixel-perfect PDF documents from your Word files. Our converter ensures that every image, bullet point, and font style is preserved, resulting in a professional-grade PDF ready for sharing or printing.
+              Convert your PDF documents into fully editable Microsoft Word files while maintaining the original layout, fonts, and images. Our tool uses advanced OCR and document structure analysis to provide high-quality .docx files.
             </p>
           </section>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-8 bg-indigo-50 dark:bg-indigo-900/10 rounded-3xl border border-indigo-100 dark:border-indigo-900/30 space-y-4">
-              <h3 className="font-bold text-lg text-indigo-900 dark:text-indigo-100 flex items-center gap-2">
+            <div className="p-8 bg-blue-50 dark:bg-blue-900/10 rounded-3xl border border-blue-100 dark:border-blue-900/30 space-y-4">
+              <h3 className="font-bold text-lg text-blue-900 dark:text-blue-100 flex items-center gap-2">
                 <CheckCircle2 className="w-5 h-5" />
-                Universal Compatibility
+                Preserve Layout
               </h3>
-              <p className="text-sm text-indigo-800/70 dark:text-indigo-400/70 leading-relaxed">
-                PDFs are readable on all devices, ensuring your recipient sees exactly what you intended without needing Microsoft Word installed.
+              <p className="text-sm text-blue-800/70 dark:text-blue-400/70 leading-relaxed">
+                We ensure that your tables, columns, and styles remain exactly as they were in the original PDF, saving you hours of re-formatting time.
               </p>
             </div>
             <div className="p-8 bg-emerald-50 dark:bg-emerald-900/10 rounded-3xl border border-emerald-100 dark:border-emerald-900/30 space-y-4">
               <h3 className="font-bold text-lg text-emerald-900 dark:text-emerald-100 flex items-center gap-2">
                 <CheckCircle2 className="w-5 h-5" />
-                No Watermarks
+                Privacy First
               </h3>
               <p className="text-sm text-emerald-800/70 dark:text-emerald-400/70 leading-relaxed">
-                Enjoy clean conversions without any added watermarks or branding. Professional results every time for free.
+                Your documents are processed securely and deleted automatically from our conversion API after the session ends. We do not store or read your files.
               </p>
             </div>
           </div>
 
           <div className="p-8 bg-slate-50 dark:bg-slate-800/50 rounded-3xl">
-            <h4 className="font-bold mb-4">Why use our Word to PDF tool?</h4>
-            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
-              Using an online converter is often faster than opening heavy desktop applications. Our service is optimized for speed and works on mobile devices, making it perfect for last-minute document sharing.
-            </p>
-            <div className="flex flex-wrap gap-4 text-xs font-bold text-slate-400 uppercase tracking-widest">
-              <span>Supports .DOC</span>
-              <span>Supports .DOCX</span>
-              <span>100% Reliable</span>
-            </div>
+            <h4 className="font-bold mb-4">How to convert PDF to Word?</h4>
+            <ol className="text-sm text-slate-600 dark:text-slate-400 space-y-3 list-decimal pl-5">
+              <li>Upload your PDF file by dragging it into the box above or clicking to browser.</li>
+              <li>Ensure the file is under 3.5 MB for the best performance.</li>
+              <li>Click the "Convert to Word" button to start the process.</li>
+              <li>Wait a few seconds for the conversion to complete.</li>
+              <li>The .docx file will automatically download to your computer.</li>
+            </ol>
           </div>
         </div>
       </div>
-    <RelatedReading category="pdf" />
+      <RelatedReading category="pdf" />
     </div>
   );
 }
