@@ -1,8 +1,9 @@
+import axios from 'axios';
+import FormData from 'form-data';
 import formidable from 'formidable';
 import fs from 'fs';
-import axios from 'axios';
 
-// Disable Next.js default body parser
+// Disable Next.js default body parser to handle multipart/form-data manually
 export const config = {
   api: {
     bodyParser: false,
@@ -11,51 +12,72 @@ export const config = {
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
   const apiKey = process.env.CLOUDMERSIVE_API_KEY;
   if (!apiKey) {
-    return res.status(401).json({ error: 'API key not configured' });
+    return res.status(500).json({ error: "Cloudmersive API key not configured" });
   }
 
-  try {
-    const form = formidable();
-    const [fields, files] = await new Promise((resolve, reject) => {
-      form.parse(req, (err, fields, files) => {
-        if (err) reject(err);
-        resolve([fields, files]);
-      });
-    });
+  const form = formidable({
+    maxFileSize: 3.5 * 1024 * 1024, // 3.5 MB limit
+  });
 
-    const file = files.file?.[0] || files.file;
-    if (!file) {
-      return res.status(400).json({ error: 'No file uploaded' });
+  form.parse(req, async (err, fields, files) => {
+    if (err) {
+      return res.status(400).json({ error: "File upload error: " + err.message });
     }
 
-    const fileBuffer = fs.readFileSync(file.filepath);
+    const file = files.file;
+    if (!file) {
+      return res.status(400).json({ error: "No file uploaded" });
+    }
 
-    // Convert PowerPoint to PDF using Cloudmersive API
-    const response = await axios.post(
-      'https://api.cloudmersive.com/convert/pptx/to/pdf',
-      fileBuffer,
-      {
-        headers: {
-          'Apikey': apiKey,
-          'Content-Type': 'application/octet-stream',
-        },
-        responseType: 'arraybuffer',
+    const singleFile = Array.isArray(file) ? file[0] : file;
+
+    try {
+      const fileData = fs.readFileSync(singleFile.filepath);
+      const formData = new FormData();
+      
+      formData.append("inputFile", fileData, {
+        filename: singleFile.originalFilename,
+        contentType: singleFile.mimetype || "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      });
+
+      const response = await axios.post(
+        "https://api.cloudmersive.com/convert/pptx/to/pdf",
+        formData,
+        {
+          headers: {
+            ...formData.getHeaders(),
+            Apikey: apiKey,
+          },
+          responseType: "arraybuffer",
+          timeout: 60000,
+        }
+      );
+
+      res.setHeader("Content-Type", "application/pdf");
+      res.setHeader("Content-Disposition", `attachment; filename="${singleFile.originalFilename.replace(/\.(pptx|ppt)$/i, ".pdf")}"`);
+      return res.send(Buffer.from(response.data));
+    } catch (error) {
+      console.error("PPT Conversion Error:", error.message);
+      let errorMsg = "Failed to convert PowerPoint document.";
+      if (error.response?.data) {
+        try {
+          errorMsg += " " + Buffer.from(error.response.data).toString('utf-8').substring(0, 200);
+        } catch (e) {
+          errorMsg += " " + error.message;
+        }
       }
-    );
-
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', `attachment; filename="${file.originalFilename.replace(/\.(pptx|ppt)$/i, '.pdf')}"`);
-    res.send(Buffer.from(response.data));
-
-  } catch (error) {
-    console.error('Conversion error:', error);
-    res.status(500).json({
-      error: error.response?.data?.message || 'Conversion failed'
-    });
-  }
+      return res.status(error.response?.status || 500).json({ error: errorMsg });
+    } finally {
+      try {
+        fs.unlinkSync(singleFile.filepath);
+      } catch (e) {
+        // Ignore cleanup errors
+      }
+    }
+  });
 }
