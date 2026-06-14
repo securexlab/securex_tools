@@ -6,7 +6,7 @@ import {
   Share2 as Social, 
   Wrench as Utils,
   FileText,
-  Merge2
+  Merge
 } from "lucide-react";
 
 export const TOOLS = [
